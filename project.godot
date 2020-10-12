@@ -23,10 +23,6 @@ config/icon="res://icon.png"
 config/stretch/mode="2d"
 config/size/width=1280
 
-[autoload]
-
-Start="*res://start.gd"
-
 [debug]
 
 settings/fps/force_fps=30
