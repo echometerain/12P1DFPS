@@ -25,15 +25,29 @@ public class Player : Node2D{
 		}
 		entities.Add(Pos, Object.player);
 		entities.Add(new Vector2(12, 12), Object.enemy);
-		GD.Print("ahhhhhh");
 	}
 	public void hud(){
 		
 	}
-	public void raster(ColorRect pixel, bool Xplus, bool Yplus){
-		
-	}
 	public override void _Process(float delta){
-		
+		Vector2 tempos = Pos;
+		if(Input.IsKeyPressed((int)KeyList.W)){
+			tempos.y += 1;
+		}
+		else if(Input.IsKeyPressed((int)KeyList.S)){
+			tempos.y -= 1;
+		}
+		if(Input.IsKeyPressed((int)KeyList.A)){
+			tempos.x -= 1;
+		}
+		else if(Input.IsKeyPressed((int)KeyList.D)){
+			tempos.x += 1;
+		}
+		try{
+			if(map[(int)tempos.x, (int)tempos.y] == Object.empty){
+				Pos = tempos;
+			}
+		}catch(System.IndexOutOfRangeException){}
+		GD.Print(Pos);
 	}
 }

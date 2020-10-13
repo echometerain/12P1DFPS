@@ -98,4 +98,7 @@ public class Driver : Node
 		new driver(10, 9, 1),
 		new driver(10, 8, 1)
 	};
+	public void render(ColorRect pixel, bool Xplus, bool Yplus){
+		
+	}
 }
