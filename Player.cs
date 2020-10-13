@@ -23,7 +23,6 @@ public class Player : Node2D{
 				map[i, ii] = Object.empty;
 			}
 		}
-		entities.Add(Pos, Object.player);
 		entities.Add(new Vector2(12, 12), Object.enemy);
 	}
 	public void hud(){
@@ -44,7 +43,7 @@ public class Player : Node2D{
 			tempos.x += 1;
 		}
 		try{
-			if(map[(int)tempos.x, (int)tempos.y] == Object.empty){
+			if(map[(int)tempos.x, (int)tempos.y] == Object.empty && !entities.ContainsKey(tempos)){
 				Pos = tempos;
 			}
 		}catch(System.IndexOutOfRangeException){}
