@@ -1,25 +1,30 @@
 using Godot;
 using System;
 
-public class head : Node
+public class Driver : Node
 {
     public class driver {
 		public Vector2 unit;
 		public int lum;
-		public void put(int y, int x, int lum){
-			unit = new Vector2(y, x);
+		public driver(int x, int y, int lum){
+			unit = new Vector2(x, y);
 			this.lum = lum;
 		}
 	}
-	const int WorldY = 21;
-	const int WorldX = 21;
-	Vector2 Pos = new Vector2(WorldX/2, WorldY/2); //player position
-	byte Life = 255;
-	byte Ammo = 255;
-	byte Weapon = 255;
 	//as viewed from the top right quarter (+, +)
 	//refering to rtype and horizontal & vertical
-	driver[] fhor = {};
+	driver[] fhor = {
+		new driver(0, 1, 10),
+		new driver(0, 2, 9),
+		new driver(0, 3, 8),
+		new driver(0, 4, 7),
+		new driver(0, 5, 6),
+		new driver(0, 6, 5),
+		new driver(-1, 7, 4),
+		new driver(0, 7, 4),
+		new driver(1, 7, 4),
+		
+		};
 	driver[] fver = {};
 	driver[] shor = {};
 	driver[] sver = {};
