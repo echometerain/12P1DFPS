@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 //in this project, y comes beffore x
-public class Scene : Node2D{
+public class Player : Node2D{
 	public const int WorldX = 21;
 	public const int WorldY = 21;
 	public Vector2 Pos = new Vector2(WorldX/2, WorldY/2); //player position
@@ -25,6 +25,7 @@ public class Scene : Node2D{
 		}
 		entities.Add(Pos, Object.player);
 		entities.Add(new Vector2(12, 12), Object.enemy);
+		GD.Print("ahhhhhh");
 	}
 	public void hud(){
 		
