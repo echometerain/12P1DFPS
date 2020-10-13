@@ -11,14 +11,6 @@ public class head : Node
 			this.lum = lum;
 		}
 	}
-	const int WorldY = 21;
-	const int WorldX = 21;
-	Vector2 Pos = new Vector2(WorldX/2, WorldY/2); //player position
-	byte Life = 255;
-	byte Ammo = 255;
-	byte Weapon = 255;
-	//as viewed from the top right quarter (+, +)
-	//refering to rtype and horizontal & vertical
 	driver[] fhor = {};
 	driver[] fver = {};
 	driver[] shor = {};
