@@ -1,8 +1,10 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Collections;
 //in this project, x comes beffore y
 public class Player : Node2D{
+	public ArrayList viewport = new ArrayList{0, 1, 2, 3, 4, 5, 6, 7, 8};
 	public const int WorldX = 21;
 	public const int WorldY = 21;
 	public Vector2 Pos = new Vector2(WorldX/2, WorldY/2); //player position

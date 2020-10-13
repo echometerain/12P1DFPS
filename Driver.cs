@@ -2,6 +2,7 @@ using Godot;
 using System;
 
 public class Driver : Node{
+	public string tilename;
     public class driver {
 		public Vector2 unit;
 		public int dis; //distance
