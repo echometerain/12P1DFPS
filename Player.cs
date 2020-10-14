@@ -12,7 +12,7 @@ public class Player : Node2D{
 	public byte Ammo = 255;
 	public byte Weapon = 255;
 	enum Object{
-		empty, wall, supply, heal, spawner, player, enemy
+		empty, wall, supply, heal, spawner, player, enemy, euser
 	}
 	public enum Rtype{
 		front, side, corner, annoying
