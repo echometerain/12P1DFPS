@@ -150,8 +150,14 @@ public class Driver : Node{
 	}
 	public void render(Driver[] Drivers, bool Xplus, bool Yplus, bool sxy){
 		foreach(Driver e in Drivers){
-			Driver t = e;
-
+			Vector2 t = e.unit;
+			t.x = Xplus ? t.x : 0-t.x;
+			t.y = Yplus ? t.y : 0-t.y;
+			if(sxy){
+				int temp = t.x;
+				t.x = t.y
+			}
+			if(Player.map[])
 		}
 	}
 }
