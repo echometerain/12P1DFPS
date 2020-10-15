@@ -32,18 +32,10 @@ public class Player : Node2D{
 	}
 	public override void _Process(float delta){
 		Vector2 tempos = Pos;
-		if(Input.IsKeyPressed((int)KeyList.W)){
-			tempos.y += 1;
-		}
-		else if(Input.IsKeyPressed((int)KeyList.S)){
-			tempos.y -= 1;
-		}
-		if(Input.IsKeyPressed((int)KeyList.A)){
-			tempos.x -= 1;
-		}
-		else if(Input.IsKeyPressed((int)KeyList.D)){
-			tempos.x += 1;
-		}
+		tempos.x += Input.IsActionPressed("ui_left") ? -1 : 0;
+		tempos.x += Input.IsActionPressed("ui_right") ? 1 : 0;
+		tempos.y += Input.IsActionPressed("ui_up") ? 1 : 0;
+		tempos.y += Input.IsActionPressed("ui_down") ? -1 : 0;
 		try{
 			if(map[(int)tempos.x, (int)tempos.y] == Object.empty && !entities.ContainsKey(tempos)){
 				Pos = tempos;
