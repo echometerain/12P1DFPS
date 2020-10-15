@@ -17,7 +17,7 @@ public class Player : Node2D{
 	public enum Rtype{
 		front, side, corner, annoying
 	}
-	public Object[,] map = new Object[WorldX, WorldY];
+	public static Object[,] map = new Object[WorldX, WorldY];
 	Dictionary<Vector2, Object> entities = new Dictionary<Vector2, Object>();
 	public override void _Ready(){
 		for(int i = 0; i < WorldX-1; i++) {
@@ -25,7 +25,11 @@ public class Player : Node2D{
 				map[i, ii] = Object.empty;
 			}
 		}
-		entities.Add(new Vector2(12, 12), Object.enemy);
+		addentity(12, 12);
+	}
+	public void addentity(int x, int y){
+		entities.Add(new Vector2(x, y), Object.enemy);
+		map[y, x] = Object.empty;
 	}
 	public void hud(){
 		
@@ -37,7 +41,7 @@ public class Player : Node2D{
 		tempos.y += Input.IsActionPressed("ui_up") ? 1 : 0;
 		tempos.y += Input.IsActionPressed("ui_down") ? -1 : 0;
 		try{
-			if(map[(int)tempos.x, (int)tempos.y] < 3 && !entities.ContainsKey(tempos)){
+			if((int)map[(int)tempos.x, (int)tempos.y] < 3 && !entities.ContainsKey(tempos)){
 				Pos = tempos;
 			}
 		}catch(System.IndexOutOfRangeException){}

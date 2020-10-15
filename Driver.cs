@@ -102,16 +102,16 @@ public class Driver : Node{
 	public void interpret(int angle){ //angle*15 degrees
 		switch(angle){
 			case 0:
-				render(fver, true, true, false);
+				search(fver, true, true, false);
 				return;
 			case 6:
-				render(fver, true, true, false);
+				search(fver, true, true, false);
 				return;
 			case 12:
-				render(fver, true, true, false);
+				search(fver, true, true, false);
 				return;
 			case 18:
-				render(fver, true, true, false);
+				search(fver, true, true, false);
 				return;
 		}
 		bool xplus = false;
@@ -132,32 +132,37 @@ public class Driver : Node{
 		}
 		switch(angle/6){
 			case 1:
-				render(sver, xplus, yplus, true);
+				search(sver, xplus, yplus, true);
 				break;
 			case 2:
-				render(aver, xplus, yplus, true);
+				search(aver, xplus, yplus, true);
 				break;
 			case 3:
-				render(c, xplus, yplus, true);
+				search(c, xplus, yplus, true);
 				break;
 			case 4:
-				render(aver, xplus, yplus, false);
+				search(aver, xplus, yplus, false);
 				break;
 			case 5:
-				render(sver, xplus, yplus, false);
+				search(sver, xplus, yplus, false);
 				break;
 		}
 	}
-	public void render(Driver[] Drivers, bool Xplus, bool Yplus, bool sxy){
+	void search(Driver[] Drivers, bool Xplus, bool Yplus, bool sxy){
 		foreach(Driver e in Drivers){
 			Vector2 t = e.unit;
 			t.x = Xplus ? t.x : 0-t.x;
 			t.y = Yplus ? t.y : 0-t.y;
 			if(sxy){
-				int temp = t.x;
-				t.x = t.y
+				float temp = t.x;
+				t.x = t.y;
+				t.y = temp;
 			}
-			if(Player.map[])
+			Player.Object type = Player.map[(int)t.x, (int)t.y];
 		}
+		
+	}
+	void render(int viewer, Player.Object type){
+		
 	}
 }
