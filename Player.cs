@@ -5,19 +5,19 @@ using System.Collections;
 //in this project, x comes beffore y
 public class Player : Node2D{
 	public ArrayList viewport = new ArrayList{0, 1, 2, 3, 4, 5, 6, 7, 8};
-	public const int WorldX = 21;
-	public const int WorldY = 21;
+	const int WorldX = 21;
+	const int WorldY = 21;
 	public Vector2 Pos = new Vector2(WorldX/2, WorldY/2); //player position
 	public byte Life = 255;
 	public byte Ammo = 255;
 	public byte Weapon = 255;
-	enum Object{
-		empty, wall, supply, heal, spawner, player, enemy, euser
+	public enum Object{
+		empty, ammos, heal, wall, spawner, player, enemy, euser
 	}
 	public enum Rtype{
 		front, side, corner, annoying
 	}
-	Object[,] map = new Object[WorldX, WorldY];
+	public Object[,] map = new Object[WorldX, WorldY];
 	Dictionary<Vector2, Object> entities = new Dictionary<Vector2, Object>();
 	public override void _Ready(){
 		for(int i = 0; i < WorldX-1; i++) {
@@ -37,7 +37,7 @@ public class Player : Node2D{
 		tempos.y += Input.IsActionPressed("ui_up") ? 1 : 0;
 		tempos.y += Input.IsActionPressed("ui_down") ? -1 : 0;
 		try{
-			if(map[(int)tempos.x, (int)tempos.y] == Object.empty && !entities.ContainsKey(tempos)){
+			if(map[(int)tempos.x, (int)tempos.y] < 3 && !entities.ContainsKey(tempos)){
 				Pos = tempos;
 			}
 		}catch(System.IndexOutOfRangeException){}
