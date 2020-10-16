@@ -4,13 +4,10 @@ using System;
 public class Driver : Node{
 	public string tilename;
 	Vector2 unit;
-	int dis; //distance
-	public Driver( int x, int y, int dis){
+	byte lum; //distance
+	public Driver( int x, int y, byte lum){
 		unit = new Vector2(x, y);
-		this.dis = dis;
-	}
-	Vector2 sxy(Vector2 start){ //switch x and y
-		return new Vector2(start.y, start.x);
+		this.lum = lum;
 	}
 	//as viewed from the top right quarter (+, +)
 	//refering to rtype and horizontal & vertical
@@ -153,16 +150,29 @@ public class Driver : Node{
 			Vector2 t = e.unit;
 			t.x = Xplus ? t.x : 0-t.x;
 			t.y = Yplus ? t.y : 0-t.y;
-			if(sxy){
-				float temp = t.x;
-				t.x = t.y;
-				t.y = temp;
+			t = new Vector2(t.y, t.x);
+			if(Player.map[(int)t.x, (int)t.y] != Player.Object.empty){
+				render(1, Player.map[(int)t.x, (int)t.y], e.lum);
 			}
-			Player.Object type = Player.map[(int)t.x, (int)t.y];
 		}
 		
 	}
-	void render(int viewer, Player.Object type){
-		
+	void render(int viewer, Player.Object type, byte lum){
+		ColorRect pixel = GetChild<ColorRect>(viewer);
+		switch(type){
+			case Player.Object.ammos:
+				pixel.Color = Color.Color8(255, 255, 0, 255);
+				break;
+			case Player.Object.heal:
+				break;
+			case Player.Object.wall:
+				break;
+			case Player.Object.spawner:
+				break;
+			case Player.Object.enemy:
+				break;
+			case Player.Object.euser:
+				break;
+		}
 	}
 }
