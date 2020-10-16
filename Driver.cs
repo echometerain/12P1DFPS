@@ -158,6 +158,7 @@ public class Driver : Node{
 		
 	}
 	void render(int viewer, Player.Object type, byte lum){
+		lum = (int)255/lum;
 		ColorRect pixel = GetChild<ColorRect>(viewer);
 		switch(type){
 			case Player.Object.ammos:
