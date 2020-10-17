@@ -97,22 +97,18 @@ public class Driver : Node{
 		new Driver(10, 9, 1),
 		new Driver(10, 8, 1)
 	};
-	public void interpret(int angle, byte viewid, Vector2 pos){ //angle*15 degrees
+	public (Driver[], bool, bool, bool) interpret(int angle){ //angle*15 degrees
 		this.viewid = viewid;
 		this.pos = pos;
 		switch(angle){
 			case 0:
-				search(fver, true, true, false);
-				return;
+				return (fver, true, true, false);
 			case 6:
-				search(fver, true, true, true);
-				return;
+				return (fver, true, true, true);
 			case 12:
-				search(fver, true, false, false);
-				return;
+				return (fver, true, false, false);
 			case 18:
-				search(fver, true, false, true);
-				return;
+				return (fver, true, false, true);
 		}
 		bool xplus = false;
 		bool yplus = false;
@@ -132,62 +128,15 @@ public class Driver : Node{
 		}
 		switch(angle/6){
 			case 1:
-				search(sver, xplus, yplus, true);
-				break;
+				return (sver, xplus, yplus, true);
 			case 2:
-				search(aver, xplus, yplus, true);
-				break;
+				return (aver, xplus, yplus, true);
 			case 3:
-				search(c, xplus, yplus, true);
-				break;
+				return (c, xplus, yplus, true);
 			case 4:
-				search(aver, xplus, yplus, false);
-				break;
+				return (aver, xplus, yplus, false);
 			case 5:
-				search(sver, xplus, yplus, false);
-				break;
-		}
-	}
-	void search(Driver[] Drivers, bool Xplus, bool Yplus, bool sxy){
-		foreach(Driver e in Drivers){
-			Vector2 t = e.unit+pos;
-			t.x = Xplus ? t.x : 0-t.x;
-			t.y = Yplus ? t.y : 0-t.y;
-			t = new Vector2(t.y, t.x);
-			try{
-				if(Player.map[(int)t.x, (int)t.y] != Player.Object.empty){
-					render(1, Player.map[(int)t.x, (int)t.y], e.lum);
-					return;
-				}
-			}catch(System.IndexOutOfRangeException){
-				render(1, Player.map[(int)t.x, (int)t.y], e.lum);
-				return;
-			}
-		}
-		GetChild<ColorRect>(1).Color = Color.Color8(255, 255, 255, 255);
-	}
-	void render(int viewer, Player.Object type, byte lum){
-		lum = Convert.ToByte(25.5*lum);
-		ColorRect pixel = GetChild<ColorRect>(viewer);
-		switch(type){
-			case Player.Object.ammos:
-				pixel.Color = Color.Color8(255, 255, 0, lum);
-				break;
-			case Player.Object.heal:
-				pixel.Color = Color.Color8(255, 128, 0, lum);
-				break;
-			case Player.Object.wall:
-				pixel.Color = Color.Color8(0, 0, 255, lum);
-				break;
-			case Player.Object.spawner:
-				pixel.Color = Color.Color8(255, 255, 255, lum);
-				break;
-			case Player.Object.enemy:
-				pixel.Color = Color.Color8(0, 255, 0, lum);
-				break;
-			case Player.Object.euser:
-				pixel.Color = Color.Color8(0, 255, 0, lum);
-				break;
+				return (sver, xplus, yplus, false);
 		}
 	}
 }
