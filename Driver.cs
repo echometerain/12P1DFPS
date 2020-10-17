@@ -3,7 +3,7 @@ using System;
 
 public class Driver : Node{
 	Vector2 pos;
-	public string tilename;
+	byte viewid;
 	Vector2 unit;
 	byte lum; //distance
 	public Driver( int x, int y, byte lum){
@@ -97,19 +97,21 @@ public class Driver : Node{
 		new Driver(10, 9, 1),
 		new Driver(10, 8, 1)
 	};
-	public void interpret(int angle, int viewer, Vector2 posi){ //angle*15 degrees
+	public void interpret(int angle, byte viewid, Vector2 pos){ //angle*15 degrees
+		this.viewid = viewid;
+		this.pos = pos;
 		switch(angle){
 			case 0:
 				search(fver, true, true, false);
 				return;
 			case 6:
-				search(fver, true, true, false);
+				search(fver, true, true, true);
 				return;
 			case 12:
-				search(fver, true, true, false);
+				search(fver, true, false, false);
 				return;
 			case 18:
-				search(fver, true, true, false);
+				search(fver, true, false, true);
 				return;
 		}
 		bool xplus = false;
