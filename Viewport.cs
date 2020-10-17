@@ -27,22 +27,22 @@ public class Viewport : Node{
 		switch(type){
 			case Player.Object.ammos:
 				pixel.Color = Color.Color8(255, 255, 0, lum);
-				break;
+				return;
 			case Player.Object.heal:
 				pixel.Color = Color.Color8(255, 128, 0, lum);
-				break;
+				return;
 			case Player.Object.wall:
 				pixel.Color = Color.Color8(0, 0, 255, lum);
-				break;
+				return;
 			case Player.Object.spawner:
 				pixel.Color = Color.Color8(255, 255, 255, lum);
-				break;
+				return;
 			case Player.Object.enemy:
 				pixel.Color = Color.Color8(0, 255, 0, lum);
-				break;
+				return;
 			case Player.Object.euser:
 				pixel.Color = Color.Color8(0, 255, 0, lum);
-				break;
+				return;
 		}
 	}
 }
