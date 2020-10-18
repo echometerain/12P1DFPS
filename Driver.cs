@@ -98,8 +98,6 @@ public class Driver : Node{
 		new Driver(10, 8, 1)
 	};
 	public (Driver[], bool, bool, bool) interpret(int angle){ //angle*15 degrees
-		this.viewid = viewid;
-		this.pos = pos;
 		switch(angle){
 			case 0:
 				return (fver, true, true, false);
@@ -138,5 +136,7 @@ public class Driver : Node{
 			case 5:
 				return (sver, xplus, yplus, false);
 		}
+		GD.PrintErr("graphics defalted");
+		return (c, true, true, false);
 	}
 }
