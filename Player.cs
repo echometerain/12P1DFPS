@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Collections;
 //in this project, x comes beffore y
 public class Player : Node2D{
-	public ArrayList viewport = new ArrayList{0, 1, 2, 3, 4, 5, 6, 7, 8};
 	const int WorldX = 21;
 	const int WorldY = 21;
 	public Vector2 Pos = new Vector2(WorldX/2, WorldY/2); //player position
@@ -30,9 +29,6 @@ public class Player : Node2D{
 	public void addentity(int x, int y){
 		entities.Add(new Vector2(x, y), Object.enemy);
 		map[y, x] = Object.empty;
-	}
-	public void hud(){
-		
 	}
 	public override void _Process(float delta){
 		Vector2 tempos = Pos;
