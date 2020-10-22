@@ -3,10 +3,9 @@ using System;
 using System.Collections.Generic;
 
 public class Graphics : Node2D{
-	public List<Byte> viewport = new List<Byte>{0, 1, 2, 3, 4, 5, 6, 7, 8};
 	static byte viewid;
 	
-	public class inis{
+	public class inis{//gets the light distance from pos(lum) and vector distance(unit)
 		public Vector2 unit;
 		public byte lum; //distance
 		public inis(int x, int y, byte lum){
@@ -14,6 +13,7 @@ public class Graphics : Node2D{
 			this.lum = lum;
 		}
 	}
+	//searches through cordiantes to fine if theres objects in the way
 	//as viewed from the top right quarter (+, +)
 	//refering to rtype and horizontal & vertical
 	static inis[] fver = {
@@ -101,7 +101,7 @@ public class Graphics : Node2D{
 		new inis(10, 9, 1),
 		new inis(10, 8, 1)
 	};
-	public static void interpret(int angle, byte viewidt, Vector2 posi){ //angle*15 degrees
+	public static void interpret(int angle, byte viewidt, Vector2 pos){ //angle*15 degrees
 		viewid = viewidt;
 		switch(angle){
 			case 0:
