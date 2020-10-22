@@ -1,7 +1,6 @@
 using Godot;
 using System;
 using System.Collections.Generic;
-using System.Collections;
 //in this project, x comes beffore y
 public class Player : Node2D{
 	const int WorldX = 21;
@@ -39,8 +38,10 @@ public class Player : Node2D{
 		try{
 			if((int)map[(int)tempos.x, (int)tempos.y] < 3 && !entities.ContainsKey(tempos)){
 				Pos = tempos;
+				Graphics.moved();
 			}
 		}catch(System.IndexOutOfRangeException){}
 		GD.Print(Pos);
+		GD.Print(Graphics.sight);
 	}
 }
