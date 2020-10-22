@@ -1,7 +1,6 @@
 using Godot;
 using System;
 using System.Collections.Generic;
-using System.Collections;
 //in this project, x comes beffore y
 public class Player : Node2D{
 	const int WorldX = 21;
