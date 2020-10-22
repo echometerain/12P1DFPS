@@ -101,7 +101,7 @@ public class Graphics : Node2D{
 		new inis(10, 9, 1),
 		new inis(10, 8, 1)
 	};
-	public static void interpret(int angle, byte viewidt, Vector2 posi){ //angle*15 degrees
+	public static void interpret(int angle, byte viewidt, Vector2 pos){ //angle*15 degrees
 		viewid = viewidt;
 		switch(angle){
 			case 0:
@@ -153,7 +153,7 @@ public class Graphics : Node2D{
 	}
 	static void search(inis[] iniss, bool Xplus, bool Yplus, bool sxy){
 		foreach(inis e in iniss){
-			Vector2 t = e.unit+pos;
+			Vector2 t = e.unit+;
 			t.x = Xplus ? t.x : 0-t.x;
 			t.y = Yplus ? t.y : 0-t.y;
 			t = new Vector2(t.y, t.x);
