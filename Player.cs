@@ -38,8 +38,10 @@ public class Player : Node2D{
 		try{
 			if((int)map[(int)tempos.x, (int)tempos.y] < 3 && !entities.ContainsKey(tempos)){
 				Pos = tempos;
+				Graphics.moved();
 			}
 		}catch(System.IndexOutOfRangeException){}
 		GD.Print(Pos);
+		GD.Print(Graphics.sight);
 	}
 }

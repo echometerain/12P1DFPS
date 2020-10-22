@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 
 public class Graphics : Node2D{
-	static Color[] sight = new Color[24];
+	public static Color[] sight = new Color[24];
 	static Vector2 pos;
 	public class Driver{//gets the light distance from pos(lum) and vector distance(unit)
 		public Vector2 unit;
@@ -191,9 +191,12 @@ public class Graphics : Node2D{
 				break;
 		}
 	}
-	public override void _Process(float delta){
-        for(int i = 0; i < viewport.Count-1; i++) {
-			interpret(i, viewport[i], Player.Pos);
+	public static void moved(){
+		pos = Player.Pos;
+		for(byte i = 0; i <= 23; i++) {
+			interpret(i);
 		}
+	}
+	public override void _Process(float delta){
 	}
 }
