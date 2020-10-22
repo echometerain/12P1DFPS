@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 public class Graphics : Node2D{
 	public List<Byte> viewport = new List<Byte>{0, 1, 2, 3, 4, 5, 6, 7, 8};
-	static Vector2 pos;
 	static byte viewid;
 	
 	public class inis{
@@ -104,7 +103,6 @@ public class Graphics : Node2D{
 	};
 	public static void interpret(int angle, byte viewidt, Vector2 posi){ //angle*15 degrees
 		viewid = viewidt;
-		pos = posi;
 		switch(angle){
 			case 0:
 				search(fver, true, true, false);
@@ -197,7 +195,7 @@ public class Graphics : Node2D{
 	}
 	public override void _Process(float delta){
         for(int i = 0; i < viewport.Count-1; i++) {
-			interpret(i, viewport[i], );
+			interpret(i, viewport[i], Player.Pos);
 		}
 	}
 }

@@ -6,7 +6,7 @@ using System.Collections;
 public class Player : Node2D{
 	const int WorldX = 21;
 	const int WorldY = 21;
-	public Vector2 Pos = new Vector2(WorldX/2, WorldY/2); //player position
+	public static Vector2 Pos = new Vector2(WorldX/2, WorldY/2); //player position
 	public byte Life = 255;
 	public byte Ammo = 255;
 	public byte Weapon = 255;
@@ -28,7 +28,7 @@ public class Player : Node2D{
 	}
 	public void addentity(int x, int y){
 		entities.Add(new Vector2(x, y), Object.enemy);
-		map[y, x] = Object.empty;
+		map[y, x] = Object.enemy;
 	}
 	public override void _Process(float delta){
 		Vector2 tempos = Pos;
