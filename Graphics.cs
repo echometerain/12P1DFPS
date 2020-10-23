@@ -101,12 +101,7 @@ public class Graphics : Node2D{
 		new Driver(10, 9, 1),
 		new Driver(10, 8, 1)
 	};
-<<<<<<< HEAD
-	public static void interpret(int angle, byte viewidt, Vector2 pos){ //angle*15 degrees
-		viewid = viewidt;
-=======
 	public static void interpret(byte angle){ //angle*15 degrees
->>>>>>> e19e421a18ce6c5e34e051e2c26ea8213be5d720
 		switch(angle){
 			case 0:
 				search(angle, fver, true, true, false);
@@ -155,15 +150,9 @@ public class Graphics : Node2D{
 				break;
 		}
 	}
-<<<<<<< HEAD
-	static void search(inis[] iniss, bool Xplus, bool Yplus, bool sxy){
-		foreach(inis e in iniss){
-			Vector2 t = e.unit+;
-=======
 	static void search(byte angle, Driver[] Drivers, bool Xplus, bool Yplus, bool sxy){
 		foreach(Driver e in Drivers){
 			Vector2 t = e.unit+pos;
->>>>>>> e19e421a18ce6c5e34e051e2c26ea8213be5d720
 			t.x = Xplus ? t.x : 0-t.x;
 			t.y = Yplus ? t.y : 0-t.y;
 			t = new Vector2(t.y, t.x);
