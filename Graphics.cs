@@ -3,7 +3,15 @@ using System;
 using System.Collections.Generic;
 
 public class Graphics : Node2D{
-	public static Color[] sight = new Color[24];
+	public static obj[] sight = new obj[24];
+	public class obj{
+		public Player.Object type;
+		public byte bright; //luminosity
+		public obj(Player.Object type, byte bright){
+			this.type = type;
+			this.bright = bright;
+		}
+	}
 	static Vector2 pos;
 	public class Driver{//gets the light distance from pos(lum) and vector distance(unit)
 		public Vector2 unit;
@@ -162,32 +170,32 @@ public class Graphics : Node2D{
 					return;
 				}
 			}catch(System.IndexOutOfRangeException){
-				render(angle, Player.map[(int)t.x, (int)t.y], e.lum);
+				render(angle, Player.Object.wall, e.lum);
 				return;
 			}
 		}
-		sight[angle] = Color.Color8(255, 255, 255, 255);
+		sight[angle] = new obj(Player.Object.empty, 0);
 	}
 	static void render(byte angle, Player.Object type, byte lum){
-		lum = Convert.ToByte(25.5*lum);
+		byte bright = Convert.ToByte(25.5*lum);
 		switch(type){
 			case Player.Object.ammos:
-				sight[angle] = Color.Color8(255, 255, 0, lum);
+				sight[angle] = new obj(Player.Object.ammos, bright);
 				break;
 			case Player.Object.heal:
-				sight[angle] = Color.Color8(255, 128, 0, lum);
+				sight[angle] = new obj(Player.Object.heal, bright);
 				break;
 			case Player.Object.wall:
-				sight[angle] = Color.Color8(0, 0, 255, lum);
+				sight[angle] = new obj(Player.Object.wall, bright);
 				break;
 			case Player.Object.spawner:
-				sight[angle] = Color.Color8(255, 255, 255, lum);
+				sight[angle] = new obj(Player.Object.spawner, bright);
 				break;
 			case Player.Object.enemy:
-				sight[angle] = Color.Color8(0, 255, 0, lum);
+				sight[angle] = new obj(Player.Object.enemy, bright);
 				break;
 			case Player.Object.euser:
-				sight[angle] = Color.Color8(0, 255, 0, lum);
+				sight[angle] = new obj(Player.Object.euser, bright);
 				break;
 		}
 	}

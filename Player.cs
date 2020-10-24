@@ -10,7 +10,7 @@ public class Player : Node2D{
 	public byte Ammo = 255;
 	public byte Weapon = 255;
 	public enum Object{
-		empty, ammos, heal, wall, spawner, enemy, euser
+		empty, ammos, heal, wall, spawner, enemy, hurt, euser
 	}
 	public enum Rtype{
 		front, side, corner, annoying
@@ -42,6 +42,8 @@ public class Player : Node2D{
 			}
 		}catch(System.IndexOutOfRangeException){}
 		GD.Print(Pos);
-		GD.Print(Graphics.sight);
+		try{
+			GD.Print(Graphics.sight[0].type+" "+Graphics.sight[0].bright);
+		}catch(NullReferenceException){GD.Print("nullreference");}
 	}
 }

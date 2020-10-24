@@ -44,16 +44,14 @@ __meta__ = {
 margin_left = 320.0
 margin_right = 400.0
 margin_bottom = 720.0
-color = Color( 0.498039, 0.498039, 0.498039, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="5" type="ColorRect" parent="Viewer"]
 margin_left = 400.0
-margin_top = -1.0
 margin_right = 480.0
-margin_bottom = 719.0
+margin_bottom = 720.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -102,10 +100,18 @@ __meta__ = {
 
 [node name="Type" type="ColorRect" parent="."]
 margin_left = 880.0
-margin_top = -1.0
 margin_right = 960.0
-margin_bottom = 719.0
+margin_bottom = 720.0
 color = Color( 0, 0, 1, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Crosshair" type="ColorRect" parent="."]
+margin_left = 320.0
+margin_right = 400.0
+margin_bottom = 720.0
+color = Color( 0, 0, 0, 0.498039 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
