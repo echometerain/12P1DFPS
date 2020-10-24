@@ -1,9 +1,9 @@
 using Godot;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 
 public class Graphics : Node2D{
-	public static obj[] sight = new obj[24];
 	public class obj{
 		public Player.Object type;
 		public byte bright; //luminosity
@@ -12,7 +12,6 @@ public class Graphics : Node2D{
 			this.bright = bright;
 		}
 	}
-	static Vector2 pos;
 	public class Driver{//gets the light distance from pos(lum) and vector distance(unit)
 		public Vector2 unit;
 		public byte lum; //distance
@@ -21,6 +20,9 @@ public class Graphics : Node2D{
 			this.lum = lum;
 		}
 	}
+	public static obj[] sight = new obj[24];
+	static Vector2 pos;
+	byte starton = 12;
 	//searches through cordiantes to fine if theres objects in the way
 	//as viewed from the top right quarter (+, +)
 	//refering to rtype and horizontal & vertical
@@ -166,38 +168,15 @@ public class Graphics : Node2D{
 			t = new Vector2(t.y, t.x);
 			try{
 				if(Player.map[(int)t.x, (int)t.y] != Player.Object.empty){
-					render(angle, Player.map[(int)t.x, (int)t.y], e.lum);
+					sight[angle] = new obj(Player.map[(int)t.x, (int)t.y], Convert.ToByte(25.5*e.lum));
 					return;
 				}
 			}catch(System.IndexOutOfRangeException){
-				render(angle, Player.Object.wall, e.lum);
+				sight[angle] = new obj(Player.Object.wall, Convert.ToByte(25.5*e.lum));
 				return;
 			}
 		}
 		sight[angle] = new obj(Player.Object.empty, 0);
-	}
-	static void render(byte angle, Player.Object type, byte lum){
-		byte bright = Convert.ToByte(25.5*lum);
-		switch(type){
-			case Player.Object.ammos:
-				sight[angle] = new obj(Player.Object.ammos, bright);
-				break;
-			case Player.Object.heal:
-				sight[angle] = new obj(Player.Object.heal, bright);
-				break;
-			case Player.Object.wall:
-				sight[angle] = new obj(Player.Object.wall, bright);
-				break;
-			case Player.Object.spawner:
-				sight[angle] = new obj(Player.Object.spawner, bright);
-				break;
-			case Player.Object.enemy:
-				sight[angle] = new obj(Player.Object.enemy, bright);
-				break;
-			case Player.Object.euser:
-				sight[angle] = new obj(Player.Object.euser, bright);
-				break;
-		}
 	}
 	public static void moved(){
 		pos = Player.Pos;
@@ -206,5 +185,37 @@ public class Graphics : Node2D{
 		}
 	}
 	public override void _Process(float delta){
+		byte temp = 0;
+		for(int i = starton; i < starton+9; i++){
+			render(GetChild<ColorRect>(temp), (i % 24));
+			temp++;
+		}
+		try{
+			GD.Print(Graphics.sight[0].type+" "+Graphics.sight[0].bright);
+		}catch(NullReferenceException){GD.Print("nullreference");}
+	}
+	static void render(ColorRect pixel, int rnum){ //rnum = the index in sight (render number)
+		try{
+			switch(sight[rnum].type){
+            case Player.Object.ammos:
+                pixel.Color = Color.Color8(255, 255, 0, sight[rnum].bright);
+                break;
+            case Player.Object.heal:
+                pixel.Color = Color.Color8(255, 128, 0, sight[rnum].bright);
+                break;
+            case Player.Object.wall:
+                pixel.Color = Color.Color8(0, 0, 255, sight[rnum].bright);
+                break;
+            case Player.Object.spawner:
+                pixel.Color = Color.Color8(255, 255, 255, sight[rnum].bright);
+                break;
+            case Player.Object.enemy:
+                pixel.Color = Color.Color8(0, 255, 0, sight[rnum].bright);
+                break;
+            case Player.Object.euser:
+                pixel.Color = Color.Color8(0, 255, 0, sight[rnum].bright);
+                break;
+			}
+		}catch(NullReferenceException){}
 	}
 }

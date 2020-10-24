@@ -42,8 +42,5 @@ public class Player : Node2D{
 			}
 		}catch(System.IndexOutOfRangeException){}
 		GD.Print(Pos);
-		try{
-			GD.Print(Graphics.sight[0].type+" "+Graphics.sight[0].bright);
-		}catch(NullReferenceException){GD.Print("nullreference");}
 	}
 }
