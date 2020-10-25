@@ -18,7 +18,7 @@ public class Graphics : Node2D{
 	//searches through cordiantes to find if theres objects in the way
 	//as viewed from the top right quarter (+, +)
 	//refering to 0:front, 1:side, 2:annoying, and 3:corner.
-	static Vector2[,] Drivers = new Vector2{
+	static Vector2[,] Drivers = new Vector2[4 ,20]{
 		{
 			new Vector2(0, 1),
 			new Vector2(0, 2),
@@ -60,6 +60,7 @@ public class Graphics : Node2D{
 			new Vector2(3, 9),
 			new Vector2(4, 9),
 			new Vector2(3, 10),
+			new Vector2(4, 10),
 			new Vector2(4, 10)
 		},
 		{
@@ -81,6 +82,7 @@ public class Graphics : Node2D{
 			new Vector2(7, 9),
 			new Vector2(5, 10),
 			new Vector2(6, 10),
+			new Vector2(7, 10),
 			new Vector2(7, 10)
 		},
 		{
@@ -141,7 +143,7 @@ public class Graphics : Node2D{
 		}
 	}
 	static void search(byte angle, Vector2[] Vangle, bool Xplus, bool Yplus, bool sxy){
-		foreach(Driver e in Vangle){
+		foreach(Vector2 e in Vangle){
 			Vector2 t = e+pos;
 			t.x = Xplus ? t.x : 0-t.x;
 			t.y = Yplus ? t.y : 0-t.y;
