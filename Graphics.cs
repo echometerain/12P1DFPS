@@ -50,10 +50,12 @@ public class Graphics : Node2D{
 			new Vector2(2, 5),
 			new Vector2(1, 6),
 			new Vector2(2, 6),
+			new Vector2(3, 6),
 			new Vector2(2, 7),
 			new Vector2(3, 7),
 			new Vector2(2, 8),
 			new Vector2(3, 8),
+			new Vector2(4, 8),
 			new Vector2(2, 9),
 			new Vector2(3, 9),
 			new Vector2(4, 9),
@@ -68,12 +70,10 @@ public class Graphics : Node2D{
 			new Vector2(3, 4),
 			new Vector2(3, 5),
 			new Vector2(4, 5),
-			new Vector2(3, 6),
 			new Vector2(4, 6),
 			new Vector2(5, 6),
 			new Vector2(4, 7),
 			new Vector2(5, 7),
-			new Vector2(4, 8),
 			new Vector2(5, 8),
 			new Vector2(6, 8),
 			new Vector2(5, 9),
@@ -112,9 +112,11 @@ public class Graphics : Node2D{
 		switch(angle/6){
 			case 0:
 				xplus = true; yplus = true;
+				if(angle%6 == 0)yplus = false;
 				break;
 			case 1:
 				xplus = true; yplus = false;
+				if(angle%6 == 0)yplus = true;
 				break;
 			case 2:
 				xplus = false; yplus = false;
@@ -123,42 +125,21 @@ public class Graphics : Node2D{
 				xplus = false; yplus = true;
 				break;
 		}
-		switch(angle%6){
-			case 0:
-				switch(angle){
-					case 0:
-						search(angle, fver, true, true, false);
-						return;
-					case 6:
-						search(angle, fver, true, true, true);
-						return;
-					case 12:
-						search(angle, fver, true, false, false);
-						return;
-					case 18:
-						search(angle, fver, true, false, true);
-						return;
-					}
-				break;
-			case 1:
-				search(angle, sver, xplus, yplus, true);
-				return;
-			case 2:
-				search(angle, aver, xplus, yplus, true);
-				return;
-			case 3:
-				search(angle, c, xplus, yplus, true);
-				return;
-			case 4:
-				search(angle, aver, xplus, yplus, false);
-				return;
-			case 5:
-				search(angle, sver, xplus, yplus, false);
-				return;
+		if(angle%6 == 0){
+			search(angle, Drivers[0], true, xplus, yplus);
+		}
+		else if(angle%6 == 4){
+			search(angle, Drivers[2], xplus, yplus, false);
+		}
+		else if(angle%6 == 5){
+			search(angle, Drivers[1], xplus, yplus, false);
+		}
+		else{
+			search(angle, Drivers[angle%6], xplus, yplus, true);
 		}
 	}
-	static void search(byte angle, Vector2[] Drivers, bool Xplus, bool Yplus, bool sxy){
-		foreach(Driver e in Drivers){
+	static void search(byte angle, Vector2[] Vangle, bool Xplus, bool Yplus, bool sxy){
+		foreach(Driver e in Vangle){
 			Vector2 t = e+pos;
 			t.x = Xplus ? t.x : 0-t.x;
 			t.y = Yplus ? t.y : 0-t.y;
@@ -169,7 +150,7 @@ public class Graphics : Node2D{
 					return;
 				}
 			}catch(System.IndexOutOfRangeException){
-				sight[angle] = new obj(Player.Object.wall, Convert.ToByte(25.5*e.lum));
+				sight[angle] = new obj(Player.Object.wall, (11-Math.Max(t.x, t.y)));
 				return;
 			}
 		}
