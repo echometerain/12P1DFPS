@@ -125,17 +125,19 @@ public class Graphics : Node2D{
 				xplus = false; yplus = true;
 				break;
 		}
-		if(angle%6 == 0){
+		switch(angle/6){
+		case 0:
 			search(angle, Drivers[0], true, xplus, yplus);
-		}
-		else if(angle%6 == 4){
+			break;
+		case 4:
 			search(angle, Drivers[2], xplus, yplus, false);
-		}
-		else if(angle%6 == 5){
+			break;
+		case 5:
 			search(angle, Drivers[1], xplus, yplus, false);
-		}
-		else{
+			break;
+		default:
 			search(angle, Drivers[angle%6], xplus, yplus, true);
+			break;
 		}
 	}
 	static void search(byte angle, Vector2[] Vangle, bool Xplus, bool Yplus, bool sxy){
