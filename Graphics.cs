@@ -12,105 +12,97 @@ public class Graphics : Node2D{
 			this.bright = bright;
 		}
 	}
-	public class Driver{//gets the light distance from pos(lum) and vector distance(unit)
-		public Vector2 unit;
-		public byte lum; //distance
-		public Driver(int x, int y, byte lum){
-			unit = new Vector2(x, y);
-			this.lum = lum;
-		}
-	}
 	public static obj[] sight = new obj[24];
 	static Vector2 pos;
 	byte starton = 0;
 	//searches through cordiantes to fine if theres objects in the way
 	//as viewed from the top right quarter (+, +)
 	//refering to rtype and horizontal & vertical
-	static Driver[] fver = {
-		new Driver(0, 1, 10),
-		new Driver(0, 2, 9),
-		new Driver(0, 3, 8),
-		new Driver(0, 4, 7),
-		new Driver(0, 5, 6),
-		new Driver(0, 6, 5),
-		new Driver(-1, 7, 4),
-		new Driver(0, 7, 4),
-		new Driver(1, 7, 4),
-		new Driver(-1, 8, 3),
-		new Driver(0, 8, 3),
-		new Driver(1, 8, 3),
-		new Driver(-1, 9, 2),
-		new Driver(0, 9, 2),
-		new Driver(1, 9, 2),
-		new Driver(-2, 10, 1),
-		new Driver(-1, 10, 1),
-		new Driver(0, 10, 1),
-		new Driver(1, 10, 1),
-		new Driver(2, 10, 1)
+	static Vector2[] fver = {
+		new Vector2(0, 1),
+		new Vector2(0, 2),
+		new Vector2(0, 3),
+		new Vector2(0, 4),
+		new Vector2(0, 5),
+		new Vector2(0, 6),
+		new Vector2(-1, 7),
+		new Vector2(0, 7),
+		new Vector2(1, 7),
+		new Vector2(-1, 8),
+		new Vector2(0, 8),
+		new Vector2(1, 8),
+		new Vector2(-1, 9),
+		new Vector2(0, 9),
+		new Vector2(1, 9),
+		new Vector2(-2, 10),
+		new Vector2(-1, 10),
+		new Vector2(0, 10),
+		new Vector2(1, 10),
+		new Vector2(2, 10)
 	};
-	static Driver[] sver = {
-		new Driver(0, 1, 10),
-		new Driver(1, 2, 9),
-		new Driver(1, 3, 8),
-		new Driver(1, 4, 7),
-		new Driver(1, 5, 6),
-		new Driver(2, 5, 6),
-		new Driver(1, 6, 5),
-		new Driver(2, 6, 5),
-		new Driver(2, 7, 4),
-		new Driver(3, 7, 4),
-		new Driver(2, 8, 3),
-		new Driver(3, 8, 3),
-		new Driver(2, 9, 2),
-		new Driver(3, 9, 2),
-		new Driver(4, 9, 2),
-		new Driver(3, 10, 1),
-		new Driver(4, 10, 1)
+	static Vector2[] sver = {
+		new Vector2(0, 1),
+		new Vector2(1, 2),
+		new Vector2(1, 3),
+		new Vector2(1, 4),
+		new Vector2(1, 5),
+		new Vector2(2, 5),
+		new Vector2(1, 6),
+		new Vector2(2, 6),
+		new Vector2(2, 7),
+		new Vector2(3, 7),
+		new Vector2(2, 8),
+		new Vector2(3, 8),
+		new Vector2(2, 9),
+		new Vector2(3, 9),
+		new Vector2(4, 9),
+		new Vector2(3, 10),
+		new Vector2(4, 10)
 	};
-	static Driver[] aver = {
-		new Driver(1, 1, 10),
-		new Driver(1, 2, 9),
-		new Driver(2, 3, 8),
-		new Driver(2, 4, 7),
-		new Driver(3, 4, 7),
-		new Driver(3, 5, 6),
-		new Driver(4, 5, 6),
-		new Driver(3, 6, 5),
-		new Driver(4, 6, 5),
-		new Driver(5, 6, 5),
-		new Driver(4, 7, 4),
-		new Driver(5, 7, 4),
-		new Driver(4, 8, 3),
-		new Driver(5, 8, 3),
-		new Driver(6, 8, 3),
-		new Driver(5, 9, 2),
-		new Driver(6, 9, 2),
-		new Driver(7, 9, 2),
-		new Driver(5, 10, 1),
-		new Driver(6, 10, 1),
-		new Driver(7, 10, 1)
+	static Vector2[] aver = {
+		new Vector2(1, 1),
+		new Vector2(1, 2),
+		new Vector2(2, 3),
+		new Vector2(2, 4),
+		new Vector2(3, 4),
+		new Vector2(3, 5),
+		new Vector2(4, 5),
+		new Vector2(3, 6),
+		new Vector2(4, 6),
+		new Vector2(5, 6),
+		new Vector2(4, 7),
+		new Vector2(5, 7),
+		new Vector2(4, 8),
+		new Vector2(5, 8),
+		new Vector2(6, 8),
+		new Vector2(5, 9),
+		new Vector2(6, 9),
+		new Vector2(7, 9),
+		new Vector2(5, 10),
+		new Vector2(6, 10),
+		new Vector2(7, 10)
 	};
-	static Driver[] c = {
-		new Driver(1, 1, 10),
-		new Driver(2, 2, 9),
-		new Driver(3, 3, 8),
-		new Driver(4, 4, 7),
-		new Driver(5, 5, 6),
-		new Driver(6, 6, 5),
-		new Driver(6, 7, 4),
-		new Driver(7, 7, 4),
-		new Driver(7, 6, 4),
-		new Driver(7, 8, 3),
-		new Driver(8, 8, 3),
-		new Driver(8, 7, 3),
-		new Driver(8, 9, 2),
-		new Driver(9, 9, 2),
-		new Driver(9, 8, 2),
-		new Driver(8, 10, 1),
-		new Driver(9, 10, 1),
-		new Driver(10, 10, 1),
-		new Driver(10, 9, 1),
-		new Driver(10, 8, 1)
+	static Vector2[] c = {
+		new Vector2(1, 1),
+		new Vector2(2, 2),
+		new Vector2(3, 3),
+		new Vector2(4, 4),
+		new Vector2(5, 5),
+		new Vector2(6, 6),
+		new Vector2(6, 7),
+		new Vector2(7, 7),
+		new Vector2(7, 6),
+		new Vector2(7, 8),
+		new Vector2(8, 8),
+		new Vector2(8, 7),
+		new Vector2(8, 9),
+		new Vector2(9, 9),
+		new Vector2(9, 8),
+		new Vector2(8, 10),
+		new Vector2(9, 10),
+		new Vector2(10, 10),
+		new Vector2(10, 9),
+		new Vector2(10, 8)
 	};
 	public static void interpret(byte angle){ //angle*15 degrees
 		bool xplus = false;
@@ -163,15 +155,15 @@ public class Graphics : Node2D{
 				return;
 		}
 	}
-	static void search(byte angle, Driver[] Drivers, bool Xplus, bool Yplus, bool sxy){
+	static void search(byte angle, Vector2[] Drivers, bool Xplus, bool Yplus, bool sxy){
 		foreach(Driver e in Drivers){
-			Vector2 t = e.unit+pos;
+			Vector2 t = e+pos;
 			t.x = Xplus ? t.x : 0-t.x;
 			t.y = Yplus ? t.y : 0-t.y;
 			t = sxy ? new Vector2(t.y, t.x) : t;
 			try{
 				if(Player.map[(int)t.x, (int)t.y] != Player.Object.empty){
-					sight[angle] = new obj(Player.map[(int)t.x, (int)t.y], Convert.ToByte(25.5*e.lum));
+					sight[angle] = new obj(Player.map[(int)t.x, (int)t.y], Convert.ToByte(25.5*(11-Math.Max(t.x, t.y)))); //lum = 11-mathmax
 					return;
 				}
 			}catch(System.IndexOutOfRangeException){
