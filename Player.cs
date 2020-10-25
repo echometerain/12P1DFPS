@@ -21,6 +21,7 @@ public class Player : Node2D{
 			}
 		}
 		addentity(12, 12);
+		Graphics.moved();
 	}
 	public void addentity(int x, int y){
 		entities.Add(new Vector2(x, y), Object.enemy);

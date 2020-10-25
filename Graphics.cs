@@ -155,7 +155,7 @@ public class Graphics : Node2D{
 					return;
 				}
 			}catch(System.IndexOutOfRangeException){
-				byte temp = t.x > t.y ? Convert.ToByte(25.5*(11-e.x)) : Convert.ToByte(25.5*(11-e.y));
+				byte temp = e.x > e.y ? Convert.ToByte(25.5*(11-e.x)) : Convert.ToByte(25.5*(11-e.y));
 				sight[angle] = new obj(Player.Object.wall, temp);
 				return;
 			}
