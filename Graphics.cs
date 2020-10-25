@@ -22,7 +22,7 @@ public class Graphics : Node2D{
 	}
 	public static obj[] sight = new obj[24];
 	static Vector2 pos;
-	byte starton = 12;
+	byte starton = 0;
 	//searches through cordiantes to fine if theres objects in the way
 	//as viewed from the top right quarter (+, +)
 	//refering to rtype and horizontal & vertical
