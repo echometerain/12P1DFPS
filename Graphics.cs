@@ -69,6 +69,7 @@ public class Graphics : Node2D{
 	};
 	static Driver[] aver = {
 		new Driver(1, 1, 10),
+		new Driver(1, 2, 9),
 		new Driver(2, 3, 8),
 		new Driver(2, 4, 7),
 		new Driver(3, 4, 7),
@@ -112,23 +113,9 @@ public class Graphics : Node2D{
 		new Driver(10, 8, 1)
 	};
 	public static void interpret(byte angle){ //angle*15 degrees
-		switch(angle){
-			case 0:
-				search(angle, fver, true, true, false);
-				return;
-			case 6:
-				search(angle, fver, true, true, true);
-				return;
-			case 12:
-				search(angle, fver, true, false, false);
-				return;
-			case 18:
-				search(angle, fver, true, false, true);
-				return;
-		}
 		bool xplus = false;
 		bool yplus = false;
-		switch(angle/4){
+		switch(angle/6){
 			case 0:
 				xplus = true; yplus = true;
 				break;
@@ -142,22 +129,38 @@ public class Graphics : Node2D{
 				xplus = false; yplus = true;
 				break;
 		}
-		switch(angle/6){
+		switch(angle%6){
+			case 0:
+				switch(angle){
+					case 0:
+						search(angle, fver, true, true, false);
+						return;
+					case 6:
+						search(angle, fver, true, true, true);
+						return;
+					case 12:
+						search(angle, fver, true, false, false);
+						return;
+					case 18:
+						search(angle, fver, true, false, true);
+						return;
+					}
+				break;
 			case 1:
 				search(angle, sver, xplus, yplus, true);
-				break;
+				return;
 			case 2:
 				search(angle, aver, xplus, yplus, true);
-				break;
+				return;
 			case 3:
 				search(angle, c, xplus, yplus, true);
-				break;
+				return;
 			case 4:
 				search(angle, aver, xplus, yplus, false);
-				break;
+				return;
 			case 5:
 				search(angle, sver, xplus, yplus, false);
-				break;
+				return;
 		}
 	}
 	static void search(byte angle, Driver[] Drivers, bool Xplus, bool Yplus, bool sxy){
@@ -165,7 +168,7 @@ public class Graphics : Node2D{
 			Vector2 t = e.unit+pos;
 			t.x = Xplus ? t.x : 0-t.x;
 			t.y = Yplus ? t.y : 0-t.y;
-			t = new Vector2(t.y, t.x);
+			t = sxy ? new Vector2(t.y, t.x) : t;
 			try{
 				if(Player.map[(int)t.x, (int)t.y] != Player.Object.empty){
 					sight[angle] = new obj(Player.map[(int)t.x, (int)t.y], Convert.ToByte(25.5*e.lum));
@@ -191,30 +194,33 @@ public class Graphics : Node2D{
 			temp++;
 		}
 		try{
-			GD.Print(Graphics.sight[0].type+" "+Graphics.sight[0].bright);
+			GD.Print(Graphics.sight[4].type+" "+Graphics.sight[3].bright);
 		}catch(NullReferenceException){GD.Print("nullreference");}
 	}
 	static void render(ColorRect pixel, int rnum){ //rnum = the index in sight (render number)
 		try{
 			switch(sight[rnum].type){
-            case Player.Object.ammos:
-                pixel.Color = Color.Color8(255, 255, 0, sight[rnum].bright);
-                break;
-            case Player.Object.heal:
-                pixel.Color = Color.Color8(255, 128, 0, sight[rnum].bright);
-                break;
-            case Player.Object.wall:
-                pixel.Color = Color.Color8(0, 0, 255, sight[rnum].bright);
-                break;
-            case Player.Object.spawner:
-                pixel.Color = Color.Color8(255, 255, 255, sight[rnum].bright);
-                break;
-            case Player.Object.enemy:
-                pixel.Color = Color.Color8(0, 255, 0, sight[rnum].bright);
-                break;
-            case Player.Object.euser:
-                pixel.Color = Color.Color8(0, 255, 0, sight[rnum].bright);
-                break;
+	            case Player.Object.ammos:
+    	            pixel.Color = Color.Color8(255, 255, 0, sight[rnum].bright);
+        	        break;
+            	case Player.Object.heal:
+            	    pixel.Color = Color.Color8(255, 128, 0, sight[rnum].bright);
+            	    break;
+            	case Player.Object.wall:
+	                pixel.Color = Color.Color8(0, 0, 255, sight[rnum].bright);
+    	            break;
+        	    case Player.Object.spawner:
+            	    pixel.Color = Color.Color8(255, 255, 255, sight[rnum].bright);
+                	break;
+            	case Player.Object.enemy:
+                	pixel.Color = Color.Color8(0, 255, 0, sight[rnum].bright);
+                	break;
+        	    case Player.Object.euser:
+            	    pixel.Color = Color.Color8(0, 255, 0, sight[rnum].bright);
+                	break;
+				case Player.Object.empty:
+					pixel.Color = Color.Color8(0, 0, 0, 0);
+					break;
 			}
 		}catch(NullReferenceException){}
 	}
