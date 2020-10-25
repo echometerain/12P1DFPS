@@ -12,9 +12,6 @@ public class Player : Node2D{
 	public enum Object{
 		empty, ammos, heal, wall, spawner, enemy, hurt, euser
 	}
-	public enum Rtype{
-		front, side, corner, annoying
-	}
 	public static Object[,] map = new Object[WorldX, WorldY];
 	Dictionary<Vector2, Object> entities = new Dictionary<Vector2, Object>();
 	public override void _Ready(){

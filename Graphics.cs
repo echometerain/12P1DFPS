@@ -18,8 +18,8 @@ public class Graphics : Node2D{
 	//searches through cordiantes to find if theres objects in the way
 	//as viewed from the top right quarter (+, +)
 	//refering to 0:front, 1:side, 2:annoying, and 3:corner.
-	static Vector2[,] Drivers = new Vector2[4 ,20]{
-		{
+	static Vector2[][] Drivers = new Vector2[4][]{
+		new Vector2[]{
 			new Vector2(0, 1),
 			new Vector2(0, 2),
 			new Vector2(0, 3),
@@ -41,7 +41,7 @@ public class Graphics : Node2D{
 			new Vector2(1, 10),
 			new Vector2(2, 10)
 		},
-		{
+		new Vector2[]{
 			new Vector2(0, 1),
 			new Vector2(1, 2),
 			new Vector2(1, 3),
@@ -60,10 +60,9 @@ public class Graphics : Node2D{
 			new Vector2(3, 9),
 			new Vector2(4, 9),
 			new Vector2(3, 10),
-			new Vector2(4, 10),
 			new Vector2(4, 10)
 		},
-		{
+		new Vector2[]{
 			new Vector2(1, 1),
 			new Vector2(1, 2),
 			new Vector2(2, 3),
@@ -82,10 +81,9 @@ public class Graphics : Node2D{
 			new Vector2(7, 9),
 			new Vector2(5, 10),
 			new Vector2(6, 10),
-			new Vector2(7, 10),
 			new Vector2(7, 10)
 		},
-		{
+		new Vector2[]{
 			new Vector2(1, 1),
 			new Vector2(2, 2),
 			new Vector2(3, 3),
@@ -127,34 +125,38 @@ public class Graphics : Node2D{
 				xplus = false; yplus = true;
 				break;
 		}
-		switch(angle/6){
-		case 0:
-			search(angle, Drivers[0], true, xplus, yplus);
-			break;
-		case 4:
-			search(angle, Drivers[2], xplus, yplus, false);
-			break;
-		case 5:
-			search(angle, Drivers[1], xplus, yplus, false);
-			break;
-		default:
-			search(angle, Drivers[angle%6], xplus, yplus, true);
-			break;
+		switch(angle%6){	
+			case 0:
+				search(angle, Drivers[0], true, xplus, yplus);
+				break;
+			case 4:
+				search(angle, Drivers[2], xplus, yplus, false);
+				break;
+			case 5:
+				search(angle, Drivers[1], xplus, yplus, false);
+				break;
+			default:
+				search(angle, Drivers[angle%6], xplus, yplus, true);
+				break;
 		}
 	}
 	static void search(byte angle, Vector2[] Vangle, bool Xplus, bool Yplus, bool sxy){
 		foreach(Vector2 e in Vangle){
 			Vector2 t = e+pos;
-			t.x = Xplus ? t.x : 0-t.x;
-			t.y = Yplus ? t.y : 0-t.y;
-			t = sxy ? new Vector2(t.y, t.x) : t;
+			if(!Xplus)t.x = 0-t.x;
+			if(!Yplus)t.y = 0-t.y;
+			if(sxy){
+				Vector2 tem = new Vector2(t.y, t.x);
+				t = tem;
+			}
 			try{
 				if(Player.map[(int)t.x, (int)t.y] != Player.Object.empty){
-					sight[angle] = new obj(Player.map[(int)t.x, (int)t.y], Convert.ToByte(25.5*(11-Math.Max(t.x, t.y)))); //lum = 11-mathmax
+					sight[angle] = new obj(Player.map[(int)t.x, (int)t.y], Convert.ToByte(25.5*(11-Math.Max(e.x, e.y)))); //lum = 11-mathmax
 					return;
 				}
 			}catch(System.IndexOutOfRangeException){
-				sight[angle] = new obj(Player.Object.wall, (11-Math.Max(t.x, t.y)));
+				byte temp = t.x > t.y ? Convert.ToByte(25.5*(11-e.x)) : Convert.ToByte(25.5*(11-e.y));
+				sight[angle] = new obj(Player.Object.wall, temp);
 				return;
 			}
 		}
@@ -173,7 +175,7 @@ public class Graphics : Node2D{
 			temp++;
 		}
 		try{
-			GD.Print(Graphics.sight[4].type+" "+Graphics.sight[3].bright);
+			GD.Print(Graphics.sight[3].type+" "+Graphics.sight[3].bright);
 		}catch(NullReferenceException){GD.Print("nullreference");}
 	}
 	static void render(ColorRect pixel, int rnum){ //rnum = the index in sight (render number)
