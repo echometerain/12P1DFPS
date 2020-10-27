@@ -3,8 +3,8 @@ using System;
 using System.Collections.Generic;
 //in this project, x comes beffore y
 public class Player : Node2D{
-	const int WorldX = 21;
-	const int WorldY = 21;
+	const int WorldX = 50;
+	const int WorldY = 50;
 	public static Vector2 Pos = new Vector2(WorldX/2, WorldY/2); //player position
 	public byte Life = 255;
 	public byte Ammo = 255;

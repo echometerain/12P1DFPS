@@ -14,7 +14,7 @@ public class Graphics : Node2D{
 	}
 	public static obj[] sight = new obj[24];
 	static Vector2 pos;
-	byte starton = 0;
+	byte starton = 20;
 	//searches through cordiantes to find if theres objects in the way
 	//as viewed from the top right quarter (+, +)
 	//refering to 0:front, 1:side, 2:annoying, and 3:corner.
@@ -142,9 +142,11 @@ public class Graphics : Node2D{
 	}
 	static void search(byte angle, Vector2[] Vangle, bool Xplus, bool Yplus, bool sxy){
 		foreach(Vector2 e in Vangle){
-			Vector2 t = e+pos;
-			if(!Xplus)t.x = 0-t.x;
-			if(!Yplus)t.y = 0-t.y;
+			Vector2 unit = e;
+			Vector2 t = pos;
+			if(!Xplus){unit.x = 0-e.x;}
+			if(!Yplus){unit.y = 0-e.y;}
+			t += unit;
 			if(sxy){
 				Vector2 tem = new Vector2(t.y, t.x);
 				t = tem;
@@ -157,6 +159,7 @@ public class Graphics : Node2D{
 			}catch(System.IndexOutOfRangeException){
 				byte temp = e.x > e.y ? Convert.ToByte(25.5*(11-e.x)) : Convert.ToByte(25.5*(11-e.y));
 				sight[angle] = new obj(Player.Object.wall, temp);
+				GD.Print(angle + " " + t.x +" "+ t.y);
 				return;
 			}
 		}
@@ -175,7 +178,7 @@ public class Graphics : Node2D{
 			temp++;
 		}
 		try{
-			GD.Print(Graphics.sight[3].type+" "+Graphics.sight[3].bright);
+			GD.Print(Graphics.sight[8].type+" "+Graphics.sight[8].bright);
 		}catch(NullReferenceException){GD.Print("nullreference");}
 	}
 	static void render(ColorRect pixel, int rnum){ //rnum = the index in sight (render number)
