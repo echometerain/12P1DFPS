@@ -179,7 +179,8 @@ public class Graphics : Node2D{
 		}
 		try{
 			GD.Print(Graphics.sight[8].type+" "+Graphics.sight[8].bright);
-		}catch(NullReferenceException){GD.Print("nullreference");}
+		}
+		catch(NullReferenceException){GD.Print("nullreference");}
 	}
 	static void render(ColorRect pixel, int rnum){ //rnum = the index in sight (render number)
 		try{
