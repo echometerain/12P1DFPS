@@ -14,7 +14,7 @@ public class Graphics : Node2D{
 	}
 	public static obj[] sight = new obj[24];
 	static Vector2 pos;
-	byte starton = 0;
+	byte starton = 20;
 	//searches through cordiantes to find if theres objects in the way
 	//as viewed from the top right quarter (+, +)
 	//refering to 0:front, 1:side, 2:annoying, and 3:corner.
