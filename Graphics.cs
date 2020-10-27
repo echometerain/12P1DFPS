@@ -170,7 +170,7 @@ public class Graphics : Node2D{
 	}
 	public override void _Process(float delta){
 		byte temp = 0;
-		for(int i = starton; i < starton+9; i++){
+		for(int i = starton; i < starton+10; i++){
 			render(GetChild<ColorRect>(temp), (i % 24));
 			temp++;
 		}
