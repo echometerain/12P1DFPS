@@ -35,11 +35,32 @@ public class Graphics : Node2D{
 			new Vector2(-1, 9),
 			new Vector2(0, 9),
 			new Vector2(1, 9),
-			new Vector2(-2, 10),
 			new Vector2(-1, 10),
 			new Vector2(0, 10),
 			new Vector2(1, 10),
-			new Vector2(2, 10)
+			new Vector2(-1, 11),
+			new Vector2(0, 11),
+			new Vector2(1, 11),
+			new Vector2(-2, 12),
+			new Vector2(-1, 12),
+			new Vector2(0, 12),
+			new Vector2(1, 12),
+			new Vector2(2, 12),
+			new Vector2(-2, 13),
+			new Vector2(-1, 13),
+			new Vector2(0, 13),
+			new Vector2(1, 13),
+			new Vector2(2, 13),
+			new Vector2(-2, 14),
+			new Vector2(-1, 14),
+			new Vector2(0, 14),
+			new Vector2(1, 14),
+			new Vector2(2, 14),
+			new Vector2(-2, 15),
+			new Vector2(-1, 15),
+			new Vector2(0, 15),
+			new Vector2(1, 15),
+			new Vector2(2, 15),
 		},
 		new Vector2[]{
 			new Vector2(0, 1),
@@ -59,8 +80,30 @@ public class Graphics : Node2D{
 			new Vector2(2, 9),
 			new Vector2(3, 9),
 			new Vector2(4, 9),
+			new Vector2(2, 10),
 			new Vector2(3, 10),
-			new Vector2(4, 10)
+			new Vector2(4, 10),
+			new Vector2(5, 10),
+			new Vector2(2, 11),
+			new Vector2(3, 11),
+			new Vector2(4, 11),
+			new Vector2(5, 11),
+			new Vector2(3, 12),
+			new Vector2(4, 12),
+			new Vector2(5, 12),
+			new Vector2(3, 13),
+			new Vector2(4, 13),
+			new Vector2(5, 13),
+			new Vector2(6, 13),
+			new Vector2(3, 14),
+			new Vector2(4, 14),
+			new Vector2(5, 14),
+			new Vector2(6, 14),
+			new Vector2(3, 15),
+			new Vector2(4, 15),
+			new Vector2(5, 15),
+			new Vector2(6, 15),
+			new Vector2(7, 15)
 		},
 		new Vector2[]{
 			new Vector2(1, 1),
@@ -172,13 +215,14 @@ public class Graphics : Node2D{
 	}
 	public override void _Process(float delta){
 		byte temp = 0;
-		for(int i = starton; i < starton+9; i++){
+		for(int i = starton; i < starton+10; i++){
 			render(GetChild<ColorRect>(temp), (i % 24));
 			temp++;
 		}
 		try{
 			GD.Print(Graphics.sight[8].type+" "+Graphics.sight[8].bright);
-		}catch(NullReferenceException){GD.Print("nullreference");}
+		}
+		catch(NullReferenceException){GD.Print("nullreference");}
 	}
 	static void render(ColorRect pixel, int rnum){ //rnum = the index in sight (render number)
 		try{
