@@ -15,183 +15,6 @@ public class Graphics : Node2D{
 	public static obj[] sight = new obj[24];
 	static Vector2 pos;
 	byte starton = 20;
-	//searches through cordiantes to find if theres objects in the way
-	//as viewed from the top right quarter (+, +)
-	//refering to 0:front, 1:side, 2:annoying, and 3:corner.
-	static Vector2[][] Drivers = new Vector2[4][]{
-		new Vector2[]{
-			new Vector2(0, 1),
-			new Vector2(0, 2),
-			new Vector2(0, 3),
-			new Vector2(0, 4),
-			new Vector2(0, 5),
-			new Vector2(0, 6),
-			new Vector2(-1, 7),
-			new Vector2(0, 7),
-			new Vector2(1, 7),
-			new Vector2(-1, 8),
-			new Vector2(0, 8),
-			new Vector2(1, 8),
-			new Vector2(-1, 9),
-			new Vector2(0, 9),
-			new Vector2(1, 9),
-			new Vector2(-1, 10),
-			new Vector2(0, 10),
-			new Vector2(1, 10),
-			new Vector2(-1, 11),
-			new Vector2(0, 11),
-			new Vector2(1, 11),
-			new Vector2(-2, 12),
-			new Vector2(-1, 12),
-			new Vector2(0, 12),
-			new Vector2(1, 12),
-			new Vector2(2, 12),
-			new Vector2(-2, 13),
-			new Vector2(-1, 13),
-			new Vector2(0, 13),
-			new Vector2(1, 13),
-			new Vector2(2, 13),
-			new Vector2(-2, 14),
-			new Vector2(-1, 14),
-			new Vector2(0, 14),
-			new Vector2(1, 14),
-			new Vector2(2, 14),
-			new Vector2(-2, 15),
-			new Vector2(-1, 15),
-			new Vector2(0, 15),
-			new Vector2(1, 15),
-			new Vector2(2, 15),
-		},
-		new Vector2[]{
-			new Vector2(0, 1),
-			new Vector2(1, 2),
-			new Vector2(1, 3),
-			new Vector2(1, 4),
-			new Vector2(1, 5),
-			new Vector2(2, 5),
-			new Vector2(1, 6),
-			new Vector2(2, 6),
-			new Vector2(3, 6),
-			new Vector2(2, 7),
-			new Vector2(3, 7),
-			new Vector2(2, 8),
-			new Vector2(3, 8),
-			new Vector2(4, 8),
-			new Vector2(2, 9),
-			new Vector2(3, 9),
-			new Vector2(4, 9),
-			new Vector2(2, 10),
-			new Vector2(3, 10),
-			new Vector2(4, 10),
-			new Vector2(5, 10),
-			new Vector2(2, 11),
-			new Vector2(3, 11),
-			new Vector2(4, 11),
-			new Vector2(5, 11),
-			new Vector2(3, 12),
-			new Vector2(4, 12),
-			new Vector2(5, 12),
-			new Vector2(3, 13),
-			new Vector2(4, 13),
-			new Vector2(5, 13),
-			new Vector2(6, 13),
-			new Vector2(3, 14),
-			new Vector2(4, 14),
-			new Vector2(5, 14),
-			new Vector2(6, 14),
-			new Vector2(3, 15),
-			new Vector2(4, 15),
-			new Vector2(5, 15),
-			new Vector2(6, 15),
-			new Vector2(7, 15)
-		},
-		new Vector2[]{
-			new Vector2(1, 1),
-			new Vector2(1, 2),
-			new Vector2(2, 3),
-			new Vector2(2, 4),
-			new Vector2(3, 4),
-			new Vector2(3, 5),
-			new Vector2(4, 5),
-			new Vector2(4, 6),
-			new Vector2(5, 6),
-			new Vector2(4, 7),
-			new Vector2(5, 7),
-			new Vector2(5, 8),
-			new Vector2(6, 8),
-			new Vector2(5, 9),
-			new Vector2(6, 9),
-			new Vector2(7, 9),
-			new Vector2(6, 10),
-			new Vector2(7, 10),
-			new Vector2(8, 10),
-			new Vector2(6, 11),
-			new Vector2(7, 11),
-			new Vector2(8, 11),
-			new Vector2(9, 11),
-			new Vector2(6, 12),
-			new Vector2(7, 12),
-			new Vector2(8, 12),
-			new Vector2(9, 12),
-			new Vector2(7, 13),
-			new Vector2(8, 13),
-			new Vector2(9, 13),
-			new Vector2(10, 13),
-			new Vector2(7, 14),
-			new Vector2(8, 14),
-			new Vector2(9, 14),
-			new Vector2(10, 14),
-			new Vector2(11, 14),
-			new Vector2(8, 15),
-			new Vector2(9, 15),
-			new Vector2(10, 15),
-			new Vector2(11, 15),
-			new Vector2(12, 15)
-		},
-		new Vector2[]{
-			new Vector2(1, 1),
-			new Vector2(2, 2),
-			new Vector2(3, 3),
-			new Vector2(4, 4),
-			new Vector2(5, 5),
-			new Vector2(6, 6),
-			new Vector2(6, 7),
-			new Vector2(7, 7),
-			new Vector2(7, 6),
-			new Vector2(7, 8),
-			new Vector2(8, 8),
-			new Vector2(8, 7),
-			new Vector2(8, 9),
-			new Vector2(9, 9),
-			new Vector2(9, 8),
-			new Vector2(9, 10),
-			new Vector2(10, 10),
-			new Vector2(10, 9),
-			new Vector2(10, 11),
-			new Vector2(11, 11),
-			new Vector2(11, 10),
-			new Vector2(10, 12),
-			new Vector2(11, 12),
-			new Vector2(12, 12),
-			new Vector2(12, 11),
-			new Vector2(12, 10),
-			new Vector2(11, 13),
-			new Vector2(12, 13),
-			new Vector2(13, 13),
-			new Vector2(13, 12),
-			new Vector2(13, 11),
-			new Vector2(12, 14),
-			new Vector2(13, 14),
-			new Vector2(14, 14),
-			new Vector2(14, 13),
-			new Vector2(14, 12),
-			new Vector2(13, 15),
-			new Vector2(14, 15),
-			new Vector2(15, 15),
-			new Vector2(15, 14),
-			new Vector2(15, 13)
-		}
-	};
 	public static void interpret(byte angle){ //angle*15 degrees
 		bool xplus = false;
 		bool yplus = false;
@@ -227,7 +50,7 @@ public class Graphics : Node2D{
 		}
 	}
 	static void search(byte angle, byte arrId, bool Xplus, bool Yplus, bool sxy){
-		foreach(Vector2 e in Drivers[arrId]){
+		foreach(Vector2 e in Drivers.arr[arrId]){
 			Vector2 t = e;
 			if(!Xplus){t.x = 0-e.x;}
 			if(!Yplus){t.y = 0-e.y;}
@@ -244,7 +67,6 @@ public class Graphics : Node2D{
 			}catch(System.IndexOutOfRangeException){
 				byte temp = e.x > e.y ? Convert.ToByte(25.5*(11-e.x)) : Convert.ToByte(10*(16-e.y));
 				sight[angle] = new obj(Player.Object.wall, temp);
-				GD.Print(angle + " " + t.x +" "+ t.y);
 				return;
 			}
 		}
@@ -262,10 +84,6 @@ public class Graphics : Node2D{
 			render(GetChild<ColorRect>(temp), (i % 24));
 			temp++;
 		}
-		try{
-			GD.Print(Graphics.sight[8].type+" "+Graphics.sight[8].bright);
-		}
-		catch(NullReferenceException){GD.Print("nullreference");}
 	}
 	static void render(ColorRect pixel, int rnum){ //rnum = the index in sight (render number)
 		if(sight[rnum].bright == 16){sight[rnum].bright = 15;}
