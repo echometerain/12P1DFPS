@@ -21,7 +21,7 @@ public class Player : Node2D{
 			}
 		}
 		addentity(12, 12);
-		Graphics.moved();
+		Graphics.reload();
 	}
 	public void addentity(int x, int y){
 		entities.Add(new Vector2(x, y), Object.enemy);
@@ -36,7 +36,7 @@ public class Player : Node2D{
 		try{
 			if((int)map[(int)tempos.x, (int)tempos.y] < 3 && !entities.ContainsKey(tempos)){
 				Pos = tempos;
-				Graphics.moved();
+				Graphics.reload();
 			}
 		}catch(System.IndexOutOfRangeException){}
 		GD.Print(Pos);
