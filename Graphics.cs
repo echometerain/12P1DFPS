@@ -122,9 +122,31 @@ public class Graphics : Node2D{
 			new Vector2(5, 9),
 			new Vector2(6, 9),
 			new Vector2(7, 9),
-			new Vector2(5, 10),
 			new Vector2(6, 10),
-			new Vector2(7, 10)
+			new Vector2(7, 10),
+			new Vector2(8, 10),
+			new Vector2(6, 11),
+			new Vector2(7, 11),
+			new Vector2(8, 11),
+			new Vector2(9, 11),
+			new Vector2(6, 12),
+			new Vector2(7, 12),
+			new Vector2(8, 12),
+			new Vector2(9, 12),
+			new Vector2(7, 13),
+			new Vector2(8, 13),
+			new Vector2(9, 13),
+			new Vector2(10, 13),
+			new Vector2(7, 14),
+			new Vector2(8, 14),
+			new Vector2(9, 14),
+			new Vector2(10, 14),
+			new Vector2(11, 14),
+			new Vector2(8, 15),
+			new Vector2(9, 15),
+			new Vector2(10, 15),
+			new Vector2(11, 15),
+			new Vector2(12, 15)
 		},
 		new Vector2[]{
 			new Vector2(1, 1),
@@ -142,11 +164,32 @@ public class Graphics : Node2D{
 			new Vector2(8, 9),
 			new Vector2(9, 9),
 			new Vector2(9, 8),
-			new Vector2(8, 10),
 			new Vector2(9, 10),
 			new Vector2(10, 10),
 			new Vector2(10, 9),
-			new Vector2(10, 8)
+			new Vector2(10, 11),
+			new Vector2(11, 11),
+			new Vector2(11, 10),
+			new Vector2(10, 12),
+			new Vector2(11, 12),
+			new Vector2(12, 12),
+			new Vector2(12, 11),
+			new Vector2(12, 10),
+			new Vector2(11, 13),
+			new Vector2(12, 13),
+			new Vector2(13, 13),
+			new Vector2(13, 12),
+			new Vector2(13, 11),
+			new Vector2(12, 14),
+			new Vector2(13, 14),
+			new Vector2(14, 14),
+			new Vector2(14, 13),
+			new Vector2(14, 12),
+			new Vector2(13, 15),
+			new Vector2(14, 15),
+			new Vector2(15, 15),
+			new Vector2(15, 14),
+			new Vector2(15, 13)
 		}
 	};
 	public static void interpret(byte angle){ //angle*15 degrees
@@ -170,21 +213,21 @@ public class Graphics : Node2D{
 		}
 		switch(angle%6){	
 			case 0:
-				search(angle, Drivers[0], true, xplus, yplus);
+				search(angle, 0, true, xplus, yplus);
 				break;
 			case 4:
-				search(angle, Drivers[2], xplus, yplus, false);
+				search(angle, 2, xplus, yplus, false);
 				break;
 			case 5:
-				search(angle, Drivers[1], xplus, yplus, false);
+				search(angle, 1, xplus, yplus, false);
 				break;
 			default:
-				search(angle, Drivers[angle%6], xplus, yplus, true);
+				search(angle, Convert.ToByte(angle%6), xplus, yplus, true);
 				break;
 		}
 	}
-	static void search(byte angle, Vector2[] Vangle, bool Xplus, bool Yplus, bool sxy){
-		foreach(Vector2 e in Vangle){
+	static void search(byte angle, byte arrId, bool Xplus, bool Yplus, bool sxy){
+		foreach(Vector2 e in Drivers[arrId]){
 			Vector2 t = e;
 			if(!Xplus){t.x = 0-e.x;}
 			if(!Yplus){t.y = 0-e.y;}
