@@ -142,11 +142,10 @@ public class Graphics : Node2D{
 	}
 	static void search(byte angle, Vector2[] Vangle, bool Xplus, bool Yplus, bool sxy){
 		foreach(Vector2 e in Vangle){
-			Vector2 unit = e;
-			Vector2 t = pos;
-			if(!Xplus){unit.x = 0-e.x;}
-			if(!Yplus){unit.y = 0-e.y;}
-			t += unit;
+			Vector2 t = e;
+			if(!Xplus){t.x = 0-e.x;}
+			if(!Yplus){t.y = 0-e.y;}
+			t += pos;
 			if(sxy){
 				Vector2 tem = new Vector2(t.y, t.x);
 				t = tem;
