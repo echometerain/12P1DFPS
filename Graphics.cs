@@ -238,11 +238,11 @@ public class Graphics : Node2D{
 			}
 			try{
 				if(Player.map[(int)t.x, (int)t.y] != Player.Object.empty){
-					sight[angle] = new obj(Player.map[(int)t.x, (int)t.y], Convert.ToByte(25.5*(11-Math.Max(e.x, e.y)))); //lum = 11-mathmax
+					sight[angle] = new obj(Player.map[(int)t.x, (int)t.y], Convert.ToByte(10*(16-Math.Max(e.x, e.y)))); //lum = 11-mathmax
 					return;
 				}
 			}catch(System.IndexOutOfRangeException){
-				byte temp = e.x > e.y ? Convert.ToByte(25.5*(11-e.x)) : Convert.ToByte(25.5*(11-e.y));
+				byte temp = e.x > e.y ? Convert.ToByte(25.5*(11-e.x)) : Convert.ToByte(10*(16-e.y));
 				sight[angle] = new obj(Player.Object.wall, temp);
 				GD.Print(angle + " " + t.x +" "+ t.y);
 				return;
@@ -268,6 +268,7 @@ public class Graphics : Node2D{
 		catch(NullReferenceException){GD.Print("nullreference");}
 	}
 	static void render(ColorRect pixel, int rnum){ //rnum = the index in sight (render number)
+		if(sight[rnum].bright == 16){sight[rnum].bright = 15;}
 		try{
 			switch(sight[rnum].type){
 	            case Player.Object.ammos:
