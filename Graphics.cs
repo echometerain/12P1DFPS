@@ -216,13 +216,13 @@ public class Graphics : Node2D{
 				search(angle, 0, true, xplus, yplus);
 				break;
 			case 4:
-				search(angle, 2, xplus, yplus, false);
+				search(angle, 2, xplus, yplus, true);
 				break;
 			case 5:
-				search(angle, 1, xplus, yplus, false);
+				search(angle, 1, xplus, yplus, true);
 				break;
 			default:
-				search(angle, Convert.ToByte(angle%6), xplus, yplus, true);
+				search(angle, Convert.ToByte(angle%6), xplus, yplus, false);
 				break;
 		}
 	}
