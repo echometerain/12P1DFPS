@@ -1,31 +1,42 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 //in this project, x comes beffore y
 public class Player : Node2D{
-	const int WorldX = 50;
-	const int WorldY = 50;
-	public static Vector2 Pos = new Vector2(WorldX/2, WorldY/2); //player position
+	int WorldX = 0;
+	int WorldY = 0;
+	public static Vector2 Pos = new Vector2(0, 0); //player position
 	public byte Life = 255;
 	public byte Ammo = 255;
 	public byte Weapon = 255;
 	public enum Object{
 		empty, ammos, heal, wall, spawner, enemy, hurt, euser
 	}
-	public static Object[,] map = new Object[WorldX, WorldY];
+	public static Object[,] map;
 	Dictionary<Vector2, Object> entities = new Dictionary<Vector2, Object>();
 	public override void _Ready(){
-		for(int i = 0; i < WorldX-1; i++) {
-			for(int ii = 0; ii < WorldY-1; ii++) {
-				map[i, ii] = Object.empty;
+		String dirpath = System.Environment.GetEnvironmentVariable("LOCALAPPDATA")+@"\12P1DFPS\level.bmp";
+		Bitmap image = new Bitmap(dirpath);
+		WorldX = image.Width;
+		WorldY = image.Height;
+		for(int i = 0; i < WorldX; i++){
+			for(int ii = 0; ii < WorldY; ii++){
+				System.Drawing.Color t = image.GetPixel(i, ii);
+				if(t.R == 255 && t.G == 255 && t.B == 0){
+					
+				}
+				else if(){
+
+				}
 			}
 		}
-		addentity(12, 12);
+		addentity(Object.enemy, 12, 12);
 		Graphics.reload();
 	}
-	public void addentity(int x, int y){
-		entities.Add(new Vector2(x, y), Object.enemy);
-		map[y, x] = Object.enemy;
+	public void addentity(Object thing, int x, int y){
+		entities.Add(new Vector2(x, y), thing);
+		map[y, x] = thing;
 	}
 	public override void _Process(float delta){
 		Vector2 tempos = Pos;
