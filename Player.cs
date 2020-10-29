@@ -23,12 +23,7 @@ public class Player : Node2D{
 		for(int i = 0; i < WorldX; i++){
 			for(int ii = 0; ii < WorldY; ii++){
 				System.Drawing.Color t = image.GetPixel(i, ii);
-				if(t.R == 255 && t.G == 255 && t.B == 0){
-					
-				}
-				else if(){
-
-				}
+				
 			}
 		}
 		addentity(Object.enemy, 12, 12);

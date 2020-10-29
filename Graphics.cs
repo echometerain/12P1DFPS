@@ -12,6 +12,7 @@ public class Graphics : Node2D{
 			this.bright = bright;
 		}
 	}
+	public static Dictionary colours = new Dictionary{};
 	public static obj[] sight = new obj[24]; //every direction of the viewport
 	static Vector2 pos;
 	byte starton = 20; //the angle of the first rectangle
