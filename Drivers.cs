@@ -4,7 +4,7 @@ public class Drivers{
 	//as viewed from the top right quarter (+, +)
 	//refering to 0:front, 1:side, 2:annoying, and 3:corner.
 	public static Vector2[][] arr = new Vector2[4][]{
-		new Vector2[]{
+		new Vector2[]{ 
 			new Vector2(0, 1),
 			new Vector2(0, 2),
 			new Vector2(0, 3),
