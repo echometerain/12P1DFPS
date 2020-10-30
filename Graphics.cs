@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class Graphics : Node2D{
-	public class pixc{ //stores the closest viewable objects and there distance (lum)
+	public class pixc{ //stores the closest viewable objects and there distance (pixel colour)
 		public Lib.obj type;
 		public byte bright; //luminosity
 		public pixc(Lib.obj type, byte bright){
@@ -12,14 +12,6 @@ public class Graphics : Node2D{
 			this.bright = bright;
 		}
 	}
-	public static Dictionary<Lib.obj, Color> cobj = new Dictionary<Lib.obj, Color>{
-		{Lib.obj.ammos, Color.Color8(255, 255, 0, 0)},
-		{Lib.obj.heal, Color.Color8(255, 128, 0, 0)},
-		{Lib.obj.wall, Color.Color8(0, 0, 255, 0)},
-		{Lib.obj.spawner, Color.Color8(255, 255, 255, 0)},
-		{Lib.obj.enemy, Color.Color8(255, 128, 0, 0)},
-		{Lib.obj.empty, Color.Color8(0, 0, 0, 0)},
-	};
 	public static pixc[] sight = new pixc[24]; //every direction of the viewport
 	static Vector2 pos;
 	byte starton = 20; //the angle of the first rectangle
@@ -105,7 +97,8 @@ public class Graphics : Node2D{
 	static void render(ColorRect pixel, int rnum){ //rnum = the index in sight (render number)
 		Color value = new Color();
 		try{
-			cobj.TryGetValue(sight[rnum].type, out value);
+			Lib.obj2c.TryGetValue(sight[rnum].type, out value);
+			value.a = sight[rnum].bright;
 			pixel.Color = value;
 		}catch(NullReferenceException){}
 	}

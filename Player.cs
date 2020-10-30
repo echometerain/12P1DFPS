@@ -17,18 +17,26 @@ public class Player : Node2D{
 		Bitmap image = new Bitmap(dirpath);
 		WorldX = image.Width;
 		WorldY = image.Height;
+		map = new Lib.obj[WorldX, WorldY];
 		for(int i = 0; i < WorldX; i++){
 			for(int ii = 0; ii < WorldY; ii++){
 				System.Drawing.Color t = image.GetPixel(i, ii);
 				Godot.Color tc = Godot.Color.Color8(t.R, t.G, t.B, 0);
+				if(Lib.c2obj.ContainsKey(tc)){
+					Lib.obj temp;
+					Lib.c2obj.TryGetValue(tc, out temp);
+					addObj(temp, i, ii);
+				}
+				else{
+					map[i, ii] = Lib.obj.empty;
+				}
 			}
 		}
-		addentity(Lib.obj.enemy, 12, 12);
 		Graphics.reload();
 	}
-	public void addentity(Lib.obj thing, int x, int y){
+	public void addObj(Lib.obj thing, int x, int y){
 		entities.Add(new Vector2(x, y), thing);
-		map[y, x] = thing;
+		map[x, y] = thing;
 	}
 	public override void _Process(float delta){
 		Vector2 tempos = Pos;
