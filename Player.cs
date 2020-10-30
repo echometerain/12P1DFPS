@@ -10,11 +10,8 @@ public class Player : Node2D{
 	public byte Life = 255;
 	public byte Ammo = 255;
 	public byte Weapon = 255;
-	public enum Object{
-		empty, ammos, heal, wall, spawner, enemy, hurt, euser
-	}
-	public static Object[,] map;
-	Dictionary<Vector2, Object> entities = new Dictionary<Vector2, Object>();
+	public static Lib.obj[,] map;
+	Dictionary<Vector2, Lib.obj> entities = new Dictionary<Vector2, Lib.obj>();
 	public override void _Ready(){
 		String dirpath = System.Environment.GetEnvironmentVariable("LOCALAPPDATA")+@"\12P1DFPS\level.bmp";
 		Bitmap image = new Bitmap(dirpath);
@@ -23,18 +20,13 @@ public class Player : Node2D{
 		for(int i = 0; i < WorldX; i++){
 			for(int ii = 0; ii < WorldY; ii++){
 				System.Drawing.Color t = image.GetPixel(i, ii);
-				if(t.R == 255 && t.G == 255 && t.B == 0){
-					
-				}
-				else if(){
-
-				}
+				Godot.Color tc = Godot.Color.Color8(t.R, t.G, t.B, 0);
 			}
 		}
-		addentity(Object.enemy, 12, 12);
+		addentity(Lib.obj.enemy, 12, 12);
 		Graphics.reload();
 	}
-	public void addentity(Object thing, int x, int y){
+	public void addentity(Lib.obj thing, int x, int y){
 		entities.Add(new Vector2(x, y), thing);
 		map[y, x] = thing;
 	}

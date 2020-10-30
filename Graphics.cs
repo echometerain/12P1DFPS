@@ -4,15 +4,23 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class Graphics : Node2D{
-	public class obj{ //stores the closest viewable objects and there distance (lum)
-		public Player.Object type;
+	public class pixc{ //stores the closest viewable objects and there distance (lum)
+		public Lib.obj type;
 		public byte bright; //luminosity
-		public obj(Player.Object type, byte bright){
+		public pixc(Lib.obj type, byte bright){
 			this.type = type;
 			this.bright = bright;
 		}
 	}
-	public static obj[] sight = new obj[24]; //every direction of the viewport
+	public static Dictionary<Lib.obj, Color> cobj = new Dictionary<Lib.obj, Color>{
+		{Lib.obj.ammos, Color.Color8(255, 255, 0, 0)},
+		{Lib.obj.heal, Color.Color8(255, 128, 0, 0)},
+		{Lib.obj.wall, Color.Color8(0, 0, 255, 0)},
+		{Lib.obj.spawner, Color.Color8(255, 255, 255, 0)},
+		{Lib.obj.enemy, Color.Color8(255, 128, 0, 0)},
+		{Lib.obj.empty, Color.Color8(0, 0, 0, 0)},
+	};
+	public static pixc[] sight = new pixc[24]; //every direction of the viewport
 	static Vector2 pos;
 	byte starton = 20; //the angle of the first rectangle
 	static bool reloaded = true; //tells when the frontend has to change
@@ -51,7 +59,7 @@ public class Graphics : Node2D{
 		}
 	}
 	static void search(byte angle, byte arrId, bool Xplus, bool Yplus, bool sxy){
-		foreach(Vector2 e in Drivers.arr[arrId]){
+		foreach(Vector2 e in Lib.Drivers[arrId]){
 			Vector2 t = e;
 			if(!Xplus)t.x = 0-e.x;
 			if(!Yplus)t.y = 0-e.y;
@@ -59,16 +67,16 @@ public class Graphics : Node2D{
 			if(sxy)t = new Vector2(t.y, t.x);
 
 			try{
-				if(Player.map[(int)t.x, (int)t.y] != Player.Object.empty){
-					sight[angle] = new obj(Player.map[(int)t.x, (int)t.y], big(e)); //lum = 11-mathmax
+				if(Player.map[(int)t.x, (int)t.y] != Lib.obj.empty){
+					sight[angle] = new pixc(Player.map[(int)t.x, (int)t.y], big(e)); //lum = 11-mathmax
 					return;
 				}
 			}catch(System.IndexOutOfRangeException){
-				sight[angle] = new obj(Player.Object.wall, big(e));
+				sight[angle] = new pixc(Lib.obj.wall, big(e));
 				return;
 			}
 		}
-		sight[angle] = new obj(Player.Object.empty, 0);
+		sight[angle] = new pixc(Lib.obj.empty, 0);
 	}
 	static byte big(Vector2 et){ //calculates wether x or y is the biggest, then calculates their brightness
 		float biggest;
@@ -95,30 +103,10 @@ public class Graphics : Node2D{
 		}
 	}
 	static void render(ColorRect pixel, int rnum){ //rnum = the index in sight (render number)
+		Color value = new Color();
 		try{
-			switch(sight[rnum].type){
-	            case Player.Object.ammos:
-    	            pixel.Color = Color.Color8(255, 255, 0, sight[rnum].bright);
-        	        break;
-            	case Player.Object.heal:
-            	    pixel.Color = Color.Color8(255, 128, 0, sight[rnum].bright);
-            	    break;
-            	case Player.Object.wall:
-	                pixel.Color = Color.Color8(0, 0, 255, sight[rnum].bright);
-    	            break;
-        	    case Player.Object.spawner:
-            	    pixel.Color = Color.Color8(255, 255, 255, sight[rnum].bright);
-                	break;
-            	case Player.Object.enemy:
-                	pixel.Color = Color.Color8(0, 255, 0, sight[rnum].bright);
-                	break;
-        	    case Player.Object.euser:
-            	    pixel.Color = Color.Color8(0, 255, 0, sight[rnum].bright);
-                	break;
-				case Player.Object.empty:
-					pixel.Color = Color.Color8(0, 0, 0, 0);
-					break;
-			}
+			cobj.TryGetValue(sight[rnum].type, out value);
+			pixel.Color = value;
 		}catch(NullReferenceException){}
 	}
 }
