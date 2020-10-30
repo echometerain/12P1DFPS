@@ -98,8 +98,7 @@ public class Graphics : Node2D{
 		Color value = new Color();
 		try{
 			Lib.obj2c.TryGetValue(sight[rnum].type, out value);
-			value.a = sight[rnum].bright;
-			pixel.Color = value;
+			pixel.Color = Color.Color8((byte)value.r8, (byte)value.g8, (byte)value.b8, sight[rnum].bright);
 		}catch(NullReferenceException){}
 	}
 }
