@@ -70,7 +70,7 @@ public class Graphics : Node2D{
 		}
 		sight[angle] = new pixc(Lib.obj.empty, 0);
 	}
-	static byte big(Vector2 et){ //calculates wether x or y is the biggest, then calculates their brightness
+	static byte big(Vector2 et){ //calculates whether x or y is the biggest, then calculates their brightness
 		float biggest;
 		if(et.x == 0)et.x = 1;
 		if(et.y == 0)et.y = 1;
