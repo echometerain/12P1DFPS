@@ -3,16 +3,11 @@ public class Lib{
     //searches through cordiantes to find if theres objects in the way
 	//as viewed from the top right quarter (+, +)
 	//refering to 0:front, 1:side, 2:annoying, and 3:corner.
-<<<<<<< HEAD:Drivers.cs
-	public static Vector2[][] arr = new Vector2[4][]{
-		new Vector2[]{ 
-=======
 	public enum obj{
 		empty, ammos, heal, wall, spawner, enemy, hurt, euser
 	}
 	public static Vector2[][] Drivers = new Vector2[4][]{
 		new Vector2[]{
->>>>>>> 5b4e3ac6c314f4621ecb2f3ab03c349cc69bfbc5:Lib.cs
 			new Vector2(0, 1),
 			new Vector2(0, 2),
 			new Vector2(0, 3),
