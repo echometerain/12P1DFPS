@@ -25,8 +25,15 @@ public class Player : Node2D{
 				if(Lib.c2obj.ContainsKey(tc)){
 					Lib.obj temp;
 					Lib.c2obj.TryGetValue(tc, out temp);
-					addObj(temp, i, ii);
-					if(temp == Lib.obj.spawn) Pos = new Vector2(i, ii);
+					if((byte)temp < 5){
+						addObj(temp, i, ii);
+					}
+					else if(temp == Lib.obj.spawn){
+						Pos = new Vector2(i, ii);
+					}
+					else if((byte)temp > 5){
+						map[i, ii] = temp;
+					}
 				}
 				else{
 					map[i, ii] = Lib.obj.empty;
