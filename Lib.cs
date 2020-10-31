@@ -5,7 +5,7 @@ public class Lib{
 	//as viewed from the top right quarter (+, +)
 	//refering to 0:front, 1:side, 2:annoying, and 3:corner.
 	public enum obj{
-		empty, ammos, heal, wall, spawner, enemy, hurt, euser
+		empty, ammos, heal, wall, spawn, spawner, enemy, hurt, euser
 	}
 	public static Dictionary<obj, Color> obj2c = new Dictionary<obj, Color>{
 		{obj.ammos, Color.Color8(255, 128, 0, 0)},
@@ -20,6 +20,7 @@ public class Lib{
 		{Color.Color8(255, 128, 0, 0), obj.ammos},
 		{Color.Color8(255, 0, 0, 0), obj.heal},
 		{Color.Color8(0, 0, 255, 0), obj.wall},
+		{Color.Color8(128, 128, 128, 0), obj.spawn},
 		{Color.Color8(0, 0, 0, 0), obj.spawner},
 		{Color.Color8(0, 255, 0, 0), obj.enemy}
 	};

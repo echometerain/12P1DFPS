@@ -26,6 +26,7 @@ public class Player : Node2D{
 					Lib.obj temp;
 					Lib.c2obj.TryGetValue(tc, out temp);
 					addObj(temp, i, ii);
+					if(temp == Lib.obj.spawn) Pos = new Vector2(i, ii);
 				}
 				else{
 					map[i, ii] = Lib.obj.empty;
