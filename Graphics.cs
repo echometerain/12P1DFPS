@@ -19,7 +19,7 @@ public class Graphics : Node2D{
 	public static void interpret(byte angle){ //an angle = 15 degrees
 		bool xplus = false;
 		bool yplus = false;
-		byte area = angle%6;
+		byte area = (byte)(angle%6);
 		switch(angle/6){
 			case 0:
 				xplus = true; yplus = true;
@@ -28,14 +28,14 @@ public class Graphics : Node2D{
 			case 1:
 				xplus = true; yplus = false;
 				if(angle%6 == 0)yplus = true;
-				else{area = 6-area;}
+				else{area = (byte)(6-area);}
 				break;
 			case 2:
 				xplus = false; yplus = false;
 				break;
 			case 3:
 				xplus = false; yplus = true;
-				if(angle%6 != 0)area = 6-area;
+				if(angle%6 != 0)area = (byte)(6-area);
 				break;
 		}
 		switch(area){	
@@ -49,7 +49,7 @@ public class Graphics : Node2D{
 				search(angle, 1, xplus, yplus, true);
 				break;
 			default:
-				search(angle, Convert.ToByte(angle%6), xplus, yplus, false);
+				search(angle, area, xplus, yplus, false);
 				break;
 		}
 	}
