@@ -6,7 +6,7 @@ using System.Drawing;
 public class Player : Node2D{
 	int WorldX = 0;
 	int WorldY = 0;
-	public static Vector2 Pos = new Vector2(0, 0); //player position
+	public static Vector2 Pos = new Vector2(16, 40); //player position
 	public byte Life = 255;
 	public byte Ammo = 255;
 	public byte Weapon = 255;
@@ -53,7 +53,7 @@ public class Player : Node2D{
 		tempos.y += Input.IsActionPressed("ui_up") ? 1 : 0;
 		tempos.y += Input.IsActionPressed("ui_down") ? -1 : 0;
 		try{
-			if((int)map[(int)tempos.x, (int)tempos.y] < 3 && !entities.ContainsKey(tempos)){
+			if((int)map[(int)tempos.x, (int)tempos.y] < 5 && !entities.ContainsKey(tempos)){
 				Pos = tempos;
 				Graphics.reload();
 			}
