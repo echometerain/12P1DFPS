@@ -4,22 +4,22 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class Graphics : Node2D{
-	public class obj{ //stores the closest viewable objects and there distance (lum)
-		public Player.Object type;
+	public class pixc{ //stores the closest viewable objects and there distance (pixel colour)
+		public Lib.obj type;
 		public byte bright; //luminosity
-		public obj(Player.Object type, byte bright){
+		public pixc(Lib.obj type, byte bright){
 			this.type = type;
 			this.bright = bright;
 		}
 	}
-	public static Dictionary colours = new Dictionary{};
-	public static obj[] sight = new obj[24]; //every direction of the viewport
+	public static pixc[] sight = new pixc[24]; //every direction of the viewport
 	static Vector2 pos;
 	byte starton = 20; //the angle of the first rectangle
 	static bool reloaded = true; //tells when the frontend has to change
 	public static void interpret(byte angle){ //an angle = 15 degrees
 		bool xplus = false;
 		bool yplus = false;
+		byte area = angle%6;
 		switch(angle/6){
 			case 0:
 				xplus = true; yplus = true;
@@ -28,15 +28,17 @@ public class Graphics : Node2D{
 			case 1:
 				xplus = true; yplus = false;
 				if(angle%6 == 0)yplus = true;
+				else{area = 6-area;}
 				break;
 			case 2:
 				xplus = false; yplus = false;
 				break;
 			case 3:
 				xplus = false; yplus = true;
+				if(angle%6 != 0)area = 6-area;
 				break;
 		}
-		switch(angle%6){	
+		switch(area){	
 			case 0:
 				search(angle, 0, true, xplus, yplus);
 				break;
@@ -52,7 +54,7 @@ public class Graphics : Node2D{
 		}
 	}
 	static void search(byte angle, byte arrId, bool Xplus, bool Yplus, bool sxy){
-		foreach(Vector2 e in Drivers.arr[arrId]){
+		foreach(Vector2 e in Lib.Drivers[arrId]){
 			Vector2 t = e;
 			if(!Xplus)t.x = 0-e.x;
 			if(!Yplus)t.y = 0-e.y;
@@ -60,18 +62,18 @@ public class Graphics : Node2D{
 			if(sxy)t = new Vector2(t.y, t.x);
 
 			try{
-				if(Player.map[(int)t.x, (int)t.y] != Player.Object.empty){
-					sight[angle] = new obj(Player.map[(int)t.x, (int)t.y], big(e)); //lum = 11-mathmax
+				if(Player.map[(int)t.x, (int)t.y] != Lib.obj.empty){
+					sight[angle] = new pixc(Player.map[(int)t.x, (int)t.y], big(e)); //lum = 11-mathmax
 					return;
 				}
 			}catch(System.IndexOutOfRangeException){
-				sight[angle] = new obj(Player.Object.wall, big(e));
+				sight[angle] = new pixc(Lib.obj.wall, big(e));
 				return;
 			}
 		}
-		sight[angle] = new obj(Player.Object.empty, 0);
+		sight[angle] = new pixc(Lib.obj.empty, 0);
 	}
-	static byte big(Vector2 et){ //calculates wether x or y is the biggest, then calculates their brightness
+	static byte big(Vector2 et){ //calculates whether x or y is the biggest, then calculates their brightness
 		float biggest;
 		if(et.x == 0)et.x = 1;
 		if(et.y == 0)et.y = 1;
@@ -96,30 +98,10 @@ public class Graphics : Node2D{
 		}
 	}
 	static void render(ColorRect pixel, int rnum){ //rnum = the index in sight (render number)
+		Color value = new Color();
 		try{
-			switch(sight[rnum].type){
-	            case Player.Object.ammos:
-    	            pixel.Color = Color.Color8(255, 255, 0, sight[rnum].bright);
-        	        break;
-            	case Player.Object.heal:
-            	    pixel.Color = Color.Color8(255, 128, 0, sight[rnum].bright);
-            	    break;
-            	case Player.Object.wall:
-	                pixel.Color = Color.Color8(0, 0, 255, sight[rnum].bright);
-    	            break;
-        	    case Player.Object.spawner:
-            	    pixel.Color = Color.Color8(255, 255, 255, sight[rnum].bright);
-                	break;
-            	case Player.Object.enemy:
-                	pixel.Color = Color.Color8(0, 255, 0, sight[rnum].bright);
-                	break;
-        	    case Player.Object.euser:
-            	    pixel.Color = Color.Color8(0, 255, 0, sight[rnum].bright);
-                	break;
-				case Player.Object.empty:
-					pixel.Color = Color.Color8(0, 0, 0, 0);
-					break;
-			}
+			Lib.obj2c.TryGetValue(sight[rnum].type, out value);
+			pixel.Color = Color.Color8((byte)value.r8, (byte)value.g8, (byte)value.b8, sight[rnum].bright);
 		}catch(NullReferenceException){}
 	}
 }

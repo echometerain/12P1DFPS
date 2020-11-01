@@ -1,0 +1,8 @@
+C:\Users\wwwec\Documents\shots\.mono\temp\bin\ExportDebug\shots.dll
+C:\Users\wwwec\Documents\shots\.mono\temp\bin\ExportDebug\shots.pdb
+C:\Users\wwwec\Documents\shots\.mono\temp\obj\ExportDebug\shots.csprojAssemblyReference.cache
+C:\Users\wwwec\Documents\shots\.mono\temp\obj\ExportDebug\shots.csproj.CoreCompileInputs.cache
+C:\Users\wwwec\Documents\shots\.mono\temp\obj\ExportDebug\shots.AssemblyInfoInputs.cache
+C:\Users\wwwec\Documents\shots\.mono\temp\obj\ExportDebug\shots.AssemblyInfo.cs
+C:\Users\wwwec\Documents\shots\.mono\temp\obj\ExportDebug\shots.dll
+C:\Users\wwwec\Documents\shots\.mono\temp\obj\ExportDebug\shots.pdb

@@ -1,9 +1,30 @@
 using Godot;
-public class Drivers{
+using System.Collections.Generic;
+public class Lib{
     //searches through cordiantes to find if theres objects in the way
 	//as viewed from the top right quarter (+, +)
 	//refering to 0:front, 1:side, 2:annoying, and 3:corner.
-	public static Vector2[][] arr = new Vector2[4][]{
+	public enum obj{
+		empty, ammos, heal, wall, spawner, spawn, enemy, hurt, euser
+	}
+	public static Dictionary<obj, Color> obj2c = new Dictionary<obj, Color>{
+		{obj.ammos, Color.Color8(255, 128, 0, 0)},
+		{obj.heal, Color.Color8(255, 0, 0, 0)},
+		{obj.wall, Color.Color8(0, 0, 255, 0)},
+		{obj.spawner, Color.Color8(0, 0, 0, 0)},
+		{obj.enemy, Color.Color8(0, 255, 0, 0)},
+		{obj.empty, Color.Color8(255, 255, 255, 0)},
+		{obj.euser, Color.Color8(0, 255, 0, 0)}
+	};
+	public static Dictionary<Color, obj> c2obj = new Dictionary<Color, obj>{
+		{Color.Color8(255, 128, 0, 0), obj.ammos},
+		{Color.Color8(255, 0, 0, 0), obj.heal},
+		{Color.Color8(0, 0, 255, 0), obj.wall},
+		{Color.Color8(128, 128, 128, 0), obj.spawn},
+		{Color.Color8(0, 0, 0, 0), obj.spawner},
+		{Color.Color8(0, 255, 0, 0), obj.enemy}
+	};
+	public static Vector2[][] Drivers = new Vector2[4][]{
 		new Vector2[]{
 			new Vector2(0, 1),
 			new Vector2(0, 2),
