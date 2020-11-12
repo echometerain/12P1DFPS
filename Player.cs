@@ -46,7 +46,7 @@ public class Player : Node2D{
 		entities.Add(new Vector2(x, y), thing);
 		map[x, y] = thing;
 	}
-	public override void _Process(float delta){
+    public override void _Input(InputEvent @event){
 		Vector2 tempos = Pos;
 		tempos.x += Input.IsActionPressed("ui_left") ? -1 : 0;
 		tempos.x += Input.IsActionPressed("ui_right") ? 1 : 0;
@@ -58,6 +58,10 @@ public class Player : Node2D{
 				Graphics.reload();
 			}
 		}catch(System.IndexOutOfRangeException){}
+        base._Input(@event);
+    }
+    
+	public override void _Process(float delta){
 		GD.Print(Pos);
 	}
 }
