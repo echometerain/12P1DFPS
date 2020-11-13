@@ -14,7 +14,7 @@ public class Graphics : Node2D{
 	}
 	public static pixc[] sight = new pixc[24]; //every direction of the viewport
 	static Vector2 pos;
-	byte starton = 20; //the angle of the first rectangle
+	public static byte starton = 20; //the angle of the first rectangle
 	static bool reloaded = true; //tells when the frontend has to change
 	public static void interpret(byte angle){ //an angle = 15 degrees
 		bool xplus = false;

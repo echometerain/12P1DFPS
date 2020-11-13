@@ -47,6 +47,17 @@ public class Player : Node2D{
 		map[x, y] = thing;
 	}
     public override void _Input(InputEvent @event){
+		if(@event is InputEventMouseMotion){
+			InputEventMouseMotion mouse = (InputEventMouseMotion) @event;
+			int relative = (int) mouse.Relative.x;
+			try{
+			Int32 movel = Convert.ToInt32(relative/(Godot.OS.GetRealWindowSize().x/24));
+			GD.Print(movel);
+			Graphics.starton = Convert.ToByte((Graphics.starton + movel) % 24);
+			GD.Print(Graphics.starton);
+			}catch(Exception e){}
+			return;
+		}
 		Vector2 tempos = Pos;
 		tempos.x += Input.IsActionPressed("ui_left") ? -1 : 0;
 		tempos.x += Input.IsActionPressed("ui_right") ? 1 : 0;
@@ -58,10 +69,11 @@ public class Player : Node2D{
 				Graphics.reload();
 			}
 		}catch(System.IndexOutOfRangeException){}
+		
         base._Input(@event);
     }
     
 	public override void _Process(float delta){
-		GD.Print(Pos);
+		//GD.Print(Pos);
 	}
 }
